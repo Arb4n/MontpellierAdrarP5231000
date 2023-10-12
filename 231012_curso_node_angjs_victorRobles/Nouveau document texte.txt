@@ -1,0 +1,199 @@
+>>> Desarrollo web con JavaScript, Angular, NodeJS y MongoDB    >>>
+
+
+
+2>>> SECTION 2 >>>
+link>>>
+https://www.udemy.com/course/desarrollo-web-con-javascript-angular-nodejs-y-mongodb/learn/lecture/6446562#overview
+
+
+Créer un alias : 
+cf.>>> C:\cygwin64\home\Hal /.bash_profile 
+>>
+alias www1="cd /cygdrive/c/wamp64/www;"
+
+cf.>>>cygwin64 terminal : 
+npm init 
+etc. 
+
+licence : ISC → MIT (pq?)
+
+
+3>>> SECTION 3: SOLUCION A POSIBLES ERRORES CON MONGODB Y MONGOOSE (OPCIONAL) >>> 
+link>>>
+https://www.udemy.com/course/desarrollo-web-con-javascript-angular-nodejs-y-mongodb/learn/lecture/38015188#content
+<<<link
+
+
+
+4>>> SECTION 4 EMPEZANDO A DESAROLLAR EL API RESTFUL CON NODEJS (backend) >>>
+
+4.10>>> INSTALAR DEPENDENCIAS >>>
+
+Utilisation de nombresues librairies de node : 
+Une librairie pour ocnvertir les réponses qui arrivent en push en json 
+→ body-parser 
+>>> "body-parser" est une bibliothèque middleware (intergiciel) pour Node.js qui est couramment utilisée avec des frameworks tels qu'Express pour analyser les données provenant de requêtes HTTP. Plus précisément, "body-parser" est utilisé pour extraire les données du corps (body) des requêtes HTTP, généralement sous forme de données JSON, de données URL encodées ou d'autres formats.
+
+Voici à quoi "body-parser" sert :
+
+Analyse du corps de la requête : Il analyse le corps des requêtes HTTP entrantes pour extraire les données qu'elles contiennent.
+
+Conversion en objet JavaScript : Il prend les données extraites du corps de la requête et les convertit en un objet JavaScript que vous pouvez utiliser dans votre application.
+
+Gestion de différents formats : "body-parser" peut gérer différents formats de données, tels que JSON, données URL encodées, XML, etc.
+
+Middleware Express : "body-parser" est souvent utilisé en tant que middleware avec Express, ce qui signifie qu'il est intégré dans le flux de traitement des requêtes HTTP.
+
+Un exemple d'utilisation courante est de récupérer des données JSON à partir du corps d'une requête POST ou PUT. Voici comment vous pourriez l'utiliser avec Express :
+
+javascript
+Copy code
+const express = require('express');
+const bodyParser = require('body-parser');
+
+const app = express();
+
+// Utilisation de body-parser comme middleware pour analyser le corps des requêtes JSON.
+app.use(bodyParser.json());
+
+// Gestion d'une requête POST avec des données JSON.
+app.post('/exemple', (req, res) => {
+  const data = req.body; // Les données JSON sont extraites du corps de la requête.
+  // Faites quelque chose avec les données...
+  res.send('Requête POST traitée.');
+});
+
+app.listen(3000, () => {
+  console.log('Le serveur écoute sur le port 3000');
+});
+Cela vous permet de recevoir et de traiter des données JSON envoyées via une requête HTTP POST vers le chemin "/exemple".
+<<<
+
+module multiparty (déprécié?) ou multer (le remplace plus récemment?) ? 
+→  middleware express qui permet de gérer facilement les téléchargements de fichiers à partir de formulaires HTML ou d'autres sources.
+
+Express pour construire l'api 
+→ utilisaton de Middlewares (intergiciel lol), facilite le routing, la gestion des vues, la gestion des sessions, 
+la gestion des erreurs etc. 
+
+JWT (Json Web Token) : gestion des token, authentification, système de paire clé-valeur etc. 
+
+Mongoose 
+
+moment.js 
+DEF>>>
+
+Moment.js = une bibliothèque JavaScript populaire pour la manipulation des dates et heures. 
+Travail sur les dates, des durées, des fuseaux horaires et d'effectuer des opérations telles que le formatage, l'analyse, la comparaison et la manipulation des dates.
+Cependant, Moment.js est maintenant obsolète et n'est plus recommandée pour les nouveaux projets. Cela est dû à des problèmes de performances, à la taille du bundle (la bibliothèque est relativement grande), et au fait que de nombreuses fonctionnalités de Moment.js sont désormais intégrées dans JavaScript natif via l'objet Date et la norme ECMAScript.
+
+Au lieu d'utiliser Moment.js : recommandé d'utiliser les API JavaScript natives pour la gestion des dates et heures, telles que l'objet Date, les fonctions de formatage de dates comme Intl.DateTimeFormat, et des bibliothèques plus légères telles que "date-fns" ou "dayjs" pour des cas d'utilisation spécifiques.
+
+Voici un exemple d'utilisation de l'objet Date natif en JavaScript :
+
+```
+const date = new Date();
+console.log(date.toLocaleDateString()); // Formatage de la date en chaîne de caractères
+Si vous migrez un projet existant de Moment.js vers JavaScript natif ou vers une autre bibliothèque, vous devrez adapter votre code pour utiliser les nouvelles approches.
+```
+
+
+<<<DEF
+
+
+nodemon
+
+4.10.1>>> INSTALLATION DES PAQUETS >>>
+
+cd>>> projet 
+>>
+curso-mean2
+
+>>
+ls 
+
+>>> Installation de Express : 
+>> 
+npm install express --save 
+// --save est un flag qui permet de garder la dépendance visée ; 
+// quand on va faire npm install dans un autre projet ou en le copiant, 
+// express sera alors installé automatiquement. 
+
+
+IN>>> package.json 
+>>
+ ``` "author": "Hal",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
+``` 
+>>>
+npm install bcrypt-nodejs --save
+// pour crypter les mots de  passe 
+
+>>
+npm install body--parser --save
+DEF>>>
+Analyse du Corps de la Requête : "body-parser" analyse le corps des requêtes HTTP entrantes et extrait les données qu'elles contiennent.
+
+Conversion en Objet JavaScript : Il prend les données extraites du corps de la requête et les convertit en un objet JavaScript que vous pouvez utiliser dans votre application.
+
+Gestion de Différents Formats : "body-parser" peut gérer différents formats de données, tels que JSON, données URL encodées, XML, etc.
+
+Middleware Express : "body-parser" est souvent utilisé en tant que middleware avec Express, ce qui signifie qu'il est intégré dans le flux de traitement des requêtes HTTP.
+
+<<<DEF
+
+>>
+npm install connect-mutltiparty --save 
+
+>>
+npm install jwt-simple --save 
+
+>> 
+npm install moment --save
+MAIS>>> 
+desecrated et remplacé par l'objet js 'Date'
+et la norme EMAScript
+'objet Date, les fonctions de formatage de dates comme Intl.DateTimeFormat, et des bibliothèques plus légères telles que "date-fns" ou "dayjs" pour des cas d'utilisation spécifiques.
+
+Voici un exemple d'utilisation de l'objet Date natif en JavaScript :
+>>
+const date = new Date();
+console.log(date.toLocaleDateString()); // Formatage de la date en chaîne de caractères
+<<
+
+install Mongoose : 
+ORM qui facilite les choses et presque 
+indispensable à MongoDB
+>>
+npm install mongoose --save 
+
+>> 
+npm install mongoose-pagination --save 
+ ajoute des fonctionnalités de pagination à vos requêtes Mongoose, ce qui facilite la division des résultats de la requête en pages gérables.
+
+npm install nodemon --save-dev 
+No nos va a permitir cada vez que hagamos un cambio en nuestro API res en nuestro código de Aguirre
+pues no va a recargar el servidor y nos vamos a ahorrar nosotros tener que lanzar el comando a mano.
+permet de redémarrer automatiquement votre application Node.js à chaque fois que vous apportez des modifications à vos fichiers source, ce qui accélère considérablement le processus de développement.
+
+--save-dev: C'est un indicateur qui indique à npm d'ajouter Nodemon en tant que dépendance de développement. Les dépendances de développement sont des packages utilisés uniquement pour le développement de votre projet et ne sont pas nécessaires en production. Ils sont généralement répertoriés dans la section "devDependencies" de votre fichier package.json.
+En utilisant la commande '''npm run dev''', votre application sera exécutée avec Nodemon, ce qui signifie qu'elle sera automatiquement redémarrée à chaque modification de fichier, simplifiant ainsi le processus de développement.
+
+
+<<< 4.10.1
+
+4.11>>> DESINSTALLATION >>>
+
+link>>>
+https://www.udemy.com/course/desarrollo-web-con-javascript-angular-nodejs-y-mongodb/learn/lecture/6446572#overview
+
+npm unistall nom_de_la_dépendance 
+(nom des dépendances dans package.json)
+
+<<<4.11
+

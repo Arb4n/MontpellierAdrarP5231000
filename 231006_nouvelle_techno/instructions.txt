@@ -1,0 +1,687 @@
+01>>>
+>>> INSTALLATION DE SYMFONY 6 >>>
+
+link>>>
+https://www.youtube.com/watch?v=kuKb3VfcTWE&list=PLBq3aRiVuwyzI0MT4LhvwqkVenz5pF_DM&index=1&t=103s
+<<<
+
+
+>>>
+link>>>
+https://symfony.com/doc/current/doctrine.html
+>>
+composer require symfony/orm-pack
+>>
+composer require --dev symfony/maker-bundle
+<<<<
+
+
+>>>installer composer>>> 
+
+>>
+composer --version
+
+>>>INSTALL SYMFONY>>>
+>>
+scoop install symfony-cli
+(scoop = command package for windows)
+
+>>>CREER UN PROJET  (avec symfony): >>>
+>>
+symfony new nouveau-projet
+
+cf. cd nouveau-projet 
+→ composer.json : ce sont les outils de base de Symfony. 
+"symfony/console":"" qui gère la console, 
+le dotenv pour le fichier .env,
+le /flex pour gérer l'install de bundles, puis le framework lui-même, et le runtime pour l'exéc,
+et gestion du format yaml. 
+→ → → version minimale
+
+>>>SAVOIR QUELLE VERSION ON A >>>
+>>
+cd nouveau-projet
+>> 
+symfony console about
+
+!!!>> si Symphony 6, php 8
+
+
+>>> CREER UN PROJET >>>
+!!!>>> possible avec la commande de symfony ou composer: 
+
+>>
+symfony **** cf. en haut
+>> 
+composer create-project symfony/skeleton projet-composer
+
+
+OU>>> CREATION D'UN PROJET WEB COMPLET
+Ajouter le flag --full
+= créer tout ce qui est nécessaire pour la base pour créer un site web. 
+
+>>
+symfony new --full nouveau-projet-web
+
+!!!>>> --full is deprecated, use --webapp instead
+
+avec composer >>>
+>>
+composer create-project symfony/website-skeleton projet-composer-web  
+
+
+>>> INSTALLER VERSION ACTUELLE SUPPORTEE >>>
+symfony new --full projet-lts --version=lts
+
+>>> avec une version différente
+>>
+symfony new --full projet-4-4 --version=4.4
+
+
+>>> TESTER UN SERVEUR >>> 
+
+
+>>
+symfony server:ca:install
+
+>> 
+composer require symfony/web-server-bundle
+
+!!!>>>   
+Your requirements could not be resolved to an installable set of packages.
+    Problem 1
+    - Root composer.json requires symfony/web-server-bundle 6.3.*, found symfony/web-server-bundle[v3.3.0-BETA1, ..., 3.4.x-dev, v4.0.0-BETA1, ..., 4.4.x-dev] but it does not match the constraint.
+>>> bundle is deprecated since symfony 4.4 : use Symfony local web server 
+OU utiliser une autre version de symfony et php 
+
+>>> Reco : utiliser >>
+>>
+symfony serve 
+(qui est la cli de symfony)
+
+
+>>> BDD >>>
+>>> site web : db diagram 
+Entités au pluriel ou au singulier : pas de règles 
+
+
+
+>>> CHECK VERSIONS 
+>>
+symfony -v
+>>
+composer --version 
+OR
+composer --v 
+
+
+>>> >>>
+>>
+symfony check:requirements 
+!!!>>> zones '.......w.......w' = zones warning 
+
+Options intl 
+et PDO 
+intl : tout ce qui est internationalisations 
+PDO : tout ce qui est BDD
+s
+
+>>
+composer require symfony/intl
+
+>>> check which php modules are installed >>>
+>>
+php -m
+
+>>> zend opcache conseillé aussi
+
+
+>>> GERER SON ENVIRONNEMENT >>> 
+>> .env 
+>>> sécurité : enregistrer .env en .env.local 
+
+<<<01
+
+
+02>>>
+link>>>
+https://www.youtube.com/watch?v=kpSYFMV4eJc&list=PLJjnH9ZjxzLQoqucT8dNk12UaXl1V3R8k
+>>> PRESENTATION ET CONFIGURATION DU PROJET >>>
+
+>>> Toujours vérifier ses versions && compatibilité >>>
+>>
+php -v 
+
+>>>Changer la version de php : >>>
+>>
+symfony local:php:list
+&& créer un fichier .php-version en root,
+et placé le num de la version
+OU 
+dans composer.json, le tabl config :
+>>
+"platform": {
+    "php": "8.2.1"
+}
+
+
+
+>>
+mysql -v 
+
+>>> Il faut également le cli de symfony >>>
+>>
+symfony -v 
+
+&&
+>>
+composer --v
+OU
+composer --version 
+
+&& 
+>>> Verifier si on a tout ce qu'il faut pour Symfony >>>
+>>
+symfony check:requirements
+>>> ....w....w = warnings 
+
+
+Options intl 
+et PDO 
+intl : tout ce qui est internationalisations 
+PDO : tout ce qui est BDD
+s
+
+>>
+composer require symfony/intl
+>>> not activated ??? 
+
+Enable intl Extension:
+Depending on your server setup, you may have different 
+PHP configuration files (e.g., php.ini).
+ /etc/php/ for Linux systems or 
+ in the PHP folder for Windows systems.
+Search for the line that begins with ;extension=intl.so (on Linux) 
+or ;extension=intl (on Windows).
+Remove the semicolon ; at the beginning of the line to uncomment it. 
+It should look like this:
+>>
+extension=intl.so  ; on Linux
+;extension=intl     ; on Windows
+Save the php.ini file and close the text editor.
+
+>>>??? TODO ???>>>
+install pecl command-line tool to use intl. 
+Once pecl is installed, run the following command to install the intl extension:
+>>
+pecl install intl
+
+Follow the prompts to complete the installation.
+
+
+>>> check which php modules are installed >>>
+>>
+php -m
+
+>>> zend opcache conseillé aussi
+>>> TODO >>>
+check install opcache
+
+>>> GERER SON ENVIRONNEMENT >>> 
+.env>>>
+>> .env 
+>>> sécurité : enregistrer .env en .env.local 
+cf>>> .env.local :
+>>
+APP_ENV=dev
+= l'app est en cours de développement, 
+il faudra passer en prod quand 
+on sera en prod 
+
+>>
+APP_SECRET= *****
+utilisé pour générer les jetons CSRF 
+pour la validation des formulaires
+-- à modifier également en entrant en prod
+
+DEF>>>
+Le jeton CSRF est une protection 
+qui requiert l'insertion d'une valeur 
+aléatoire et dynamique dans une requête.
+ Cette valeur est ensuite analysée 
+ par le serveur pour déterminer 
+ si la requête est légitime.
+
+
+>>> Pour la partie notifications ou 
+envoi de mails avec file d'attente : 
+>>
+MESSENGER_TRANSPORT_DSN=doctrine://default?auto_setup=0
+On choisit avec où est stockée la file d'attente.
+
+
+cf>>>
+>>
+# DATABASE_URL="sqlite:///%kernel.project_dir%/var/data.db"
+# DATABASE_URL="mysql://app:!ChangeMe!@127.0.0.1:3306/app?serverVersion=8.0.32&charset=utf8mb4"
+# DATABASE_URL="mysql://app:!ChangeMe!@127.0.0.1:3306/app?serverVersion=10.11.2-MariaDB&charset=utf8mb4"
+DATABASE_URL="postgresql://app:!ChangeMe!@127.0.0.1:5432/app?serverVersion=15&charset=utf8"
+
+Si on utilise mysql, commenter pstgresql,
+décommenter mysql, par exemple
+Puis modifier la ligne :
+>>
+db_user → utilisateur ; 
+e.g>> root 
+db_password → le mot de passe de sa bdd 
+Si il n'y a pas de mdp, on peut tout 
+remplacer par un simple nom d'user. 
+E.G>> ici, 
+>>
+app:!ChangeMe!
+=
+user:mdp 
+ou juste user 
+<<E.G 
+>>
+db_name 
+= nom bdd 
+OU ici  
+>>
+app? 
+= nom bdd
+
+&& 
+>>
+serverVersion= 
+= la version du serveur à indiquer
+
+&& en bas : 
+>>
+# MAILER_DSN=null://null
+→ Si on veut envoyer des mails, il faut 
+un intercepteur de emails ou un serveur distant ;
+e.g mailhog (=serveur smtp qui intercepte 
+les emails qu'on envoie depuis une app. 
+cf.>>
+https://www.youtube.com/watch?v=pwrA7Ebg7Qg
+)
+Il faudra changer le numéro du port 
+E.G>> 
+# MAILER_DSN=null://null
+    ↓   ↓   ↓   
+# MAILER_DSN=null://localhost:1025
+<<E.G 
+
+
+<<.env
+
+<<<02
+
+
+03>>>
+>>> CREATION DE BASE DE DONNEES >>>
+link>>
+https://www.youtube.com/watch?v=MhVAwrujifQ
+https://dbdiagram.io/d/Symfony-e-commerce-61643981940c4c4eec8f40a5
+
+
+>>> Création de la BDD : 
+>> 
+symfony console doctrine:database:create
+
+E.G>>
+PS C:\wamp64\www\01_nouvelle_techno\II-01-ecommerce> symfony console doctrine:database:create
+Created database `nvtech_ecommerce_v1` for connection named default
+<<E.G
+
+>>> création d'une classe : 
+>>
+symfony console make:user
+
+Suivre les instructions
+
+Une classe users est créée dans 'Entity', et 
+un repository dans 'Repository'; 
+comme indiqué in console : 
+    - création de User.php dans Entity
+    - création de UserRepository dans Repository
+    - et création de security.yaml in packages/security.
+
+
+cf>>> Entity/User.php
+On voit bien que c'est une entité
+
+l.11
+>>
+class User implements UserInterface, PasswordAuthenticatedUserInterface
+la class User implémente donc UserInterface et passwoerdetc. qui 
+va permettre de gérer la sécurité et l'ahuthentification. 
+
+>>
+l.3
+namespace App\Entity;
+
+l.13
+>>
+#[ORM\Id]
+#[ORM\GeneratedValue]
+#[ORM\Column]
+= annotations (attributs php8) → permettent de savoir 
+à quoi correspond chaque propriété
+
+>>
+#[ORM\Id]  → permet de dire que c'est une clef primaire
+#[ORM\GeneratedValue] → fait un auto incrément
+#[ORM\Column] → (??? pas de type ???)
+                    ↓   ↓
+            #[ORM\Column(type: 'integer')]
+            private $id; in example
+   #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
+            ↑   ↑
+        type ici ? 
+
+>>
+    #[ORM\Column(length: 180, unique: true)]    →  propriétés 
+    private ?string $email = null;              →  écrites ainsi
+
+Ensuite, il y a les accesseurs/getters ; 
+id n'a pas de setter, il est auto-généré = pas de setId():.
+    
+Et pour email : 
+>> public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): static
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+getEmail(): permet de récupérer l'information de l'email 
+d'un utilisateur, et setEmail permet de stocker l'info. 
+Et pour chaque propriété, un getter et un setter (qu'on appelle accesseurs).
+
+
+>>> MODIFIER L'ENTITE >>>
+>> 
+symfony console make:entity 
+(on peut les faire à la main, 
+le maker est juste là pour simplifier le travail)
+On peut alors ajouter chaque nouvelle propriété (e.g prénom, email, etc.).
+lastname
+fistname
+address
+
+!!>> si une propriétédoit commencer par un zéro 0,
+la mettre en chaîne de caractères/ string. 
+
+++>> add>> 
+cf.>> 
+    #[ORM\Column]
+    private ?\DateTimeImmutable $created_at = null;
+La date doit être "maintenant" ; 
+ajout d'une option : 
+>> 
+    dans php 8, pour ajouter une option à   "#[ORM\Column(type: 'datetime_immutable')]
+    private  $created_at ; ",    on va juste faire comme ça :   " #[ORM\Column(type: 'datetime_immutable', options: ['default' => 'CURRENT_TIMESTAMP'])]
+    private  $created_at ;".  Comment faire pour  "#[ORM\Column]
+    private ?\DateTimeImmutable $created_at = null;"
+avec php 8.2.10 ?
+
+???>>>
+Pour définir une valeur par défaut pour une colonne de type DateTimeImmutable dans PHP 8.2.10 avec Doctrine, vous pouvez utiliser l’option default dans l’annotation Column. Cependant, il est important de noter que Doctrine ne prend pas en charge les expressions de base de données comme CURRENT_TIMESTAMP pour les valeurs par défaut. Vous devrez définir cela au niveau de la base de données elle-même.
+
+Voici comment vous pouvez le faire :
+
+PHP
+Ce code est généré par IA. Examinez et utilisez attentivement. Consultez notre FAQ pour plus d’informations.
+
+#[ORM\Column(type: 'datetime_immutable', options: ['default' => 'CURRENT_TIMESTAMP'])]
+private ?\DateTimeImmutable $created_at = null;
+Cependant, comme mentionné précédemment, cette approche ne fonctionnera pas avec Doctrine car elle ne prend pas en charge CURRENT_TIMESTAMP comme valeur par défaut. Une solution de contournement consiste à initialiser la propriété dans le constructeur de votre entité :
+
+PHP
+Ce code est généré par IA. Examinez et utilisez attentivement. Consultez notre FAQ pour plus d’informations.
+
+public function __construct()
+{
+    $this->created_at = new \DateTimeImmutable();
+}
+Cela garantira que chaque fois qu’une nouvelle instance de l’entité est créée, la propriété $created_at est initialisée avec le timestamp actuel.
+
+N’oubliez pas que les modifications apportées au niveau du code doivent également être synchronisées avec la base de données en exécutant la commande de mise à jour du schéma appropriée.
+
+=> comme ça ? : 
+
+#[ORM\Column(type: 'datetime_immutable', options: ['default' => 'CURRENT_TIMESTAMP'])]
+private ?\DateTimeImmutable $created_at = null;
+
+<<<???
+
+>>> Create category
+>>
+symfony console make:entity Category 
+
+>>> notion de parent : 
+Add a property 'parent' 
+>>
+add another property ? 
+> 
+parent
+> type ? 
+relation 
+> related to ? 
+Category
+>Relation? 
+ManyToOne
+>null? 
+Oui, catagory principale
+> nouv propriété pour accéder aux proprietes d'un parent ? 
+yes 
+> new field 
+categories 
+
+cf.>>>Entity/Category>>>
+>>
+colonnes orm id, orm name 
+&& deux propriétés (pq 2 ? => elle se relie 
+à elle-même) : 
+
+    entité cible : elle-même                inversée par la propriété categories (juste en bas )
+                         ↑                          ↑
+    #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'categories')]
+    private ?self $parent = null;
+                    ↑
+            mappée à :
+                        ↑
+    #[ORM\OneToMany(mappedBy: 'parent', targetEntity: self::class)]
+    private Collection $categories;
+&& 
+>>
+  public function __construct()
+    {
+        $this->categories = new ArrayCollection();
+    }
+        ↓   ↓ 
+        constructeur créé pour gérer la collection de catégories 
+
+&& en bas, 3 méthodes : 
+getCategories(): collection → permet de chercher les catégories enfant
+addCategory → ajouter une categorie enfant.
+removeCategory → tu as compris 
+
+Add>> le reste etc 
+!!!>>> is_qquechose = booléen
+E.G>> is_valid
+
+&&>>> puis : relation à faire = many to one 
+!!! un coupon doit être unique. 
+
+!!! >>> liste de questions à se poser : 
+    Quelles classes, quelles objets, combien ? 
+    Leurs propriétés 
+    leurs relations/ type de relation
+    présence obligatoire ou pas?/ null not null? 
+
+    
+>>> le code doit être unique : il faut préciser que 
+cf.>> Entity/Coupon
+>>
+    #[ORM\Column(length: 10)]
+    private ?string $code = null;
+doit être unique. 
+DONC>>>
+cf.>>> User.php
+>>
+#[ORM\Column(length: 180, unique: true)]
+    private ?string $email = null;
+Propriété unique: true à mettre in attribut
+
+mettre la même in  #[ORM\Column(length: 10)]
+    private ?string $code = null;
+        ↓       ↓
+     #[ORM\Column(length: 10, unique: true)]
+    private ?string $code = null;
+
+même chose : 
+>>
+, options: ['default' => 'CURRENT_TIMESTAMP']
+
+        ↓           ↓
+    #[ORM\Column (type: 'datetime_immutable', options: ['default' => 'CURRENT_TIMESTAMP'])]
+    private ?\DateTimeImmutable $created_at = null;
+
+Et on retrouvera 
+>>
+  #[ORM\ManyToOne(inversedBy: 'coupons')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?CouponsTypes $coupons_types = null;
+in>> Coupon 
+reliée à 
+>>
+ #[ORM\OneToMany(mappedBy: 'coupons_types', targetEntity: Coupon::class, orphanRemoval: true)]
+    private Collection $coupons;
+in>> CouponsTypes . 
+
+On retrouvera tous les paramètres déterminés au cours 
+de la création des classes/ entités. 
+
+
+>>> Création de l'entité Products (!!!s!!!)
+!!!>>> à la question :
+ Do you want to automatically delete orphaned App\Entity\Products objects (orphanRemoval)? (yes/no) [no]:
+ > no
+CAR>> un produit peut changer de catégorie.
+
+>>> Création de l'entité Image
+
+>>
+ Do you want to add a new property to Products so that you can access/update Image objects from it - e.g. $products->getImages()? (yes/no) [yes]:
+ >
+ On peut aller chercher des images d'un produit : yes
+
+>> 
+Do you want to automatically delete orphaned App\Entity\Image objects (orphanRemoval)? (yes/no) [no]:
+ >
+Est-ce qu'une image peut changer de produit? Non, : yes
+(si on suppr un produit, on suppr une image)
+
+>>> Faire order ou order_details? 
+order, car parent → order_details
+
+
+
+>>>
+Création de l'entité order 
+
+>>>< Après, ne pas oublier : 
+à chaque created at, 
+>>
+(type: 'datetime_immutable', options: ['default' => 'CURRENT_TIMESTAMP'])
+
+
+cf. in order > $reference : >>>
+>>
+unique:true
+=The unique:true constraint is commonly 
+used in database schemas to ensure 
+that a particular field or column
+ contains only unique values,
+  meaning that no two rows can have 
+  the same value in that field. 
+  This constraint helps maintain 
+  data integrity and prevents duplicate 
+  entries in a database table.
+
+
+>>> création de l'entité OrderDetails 
+{.?.}
+>>
+ Do you want to activate orphanRemoval on your relationship?
+ A OrderDetails is "orphaned" when it is removed from its related Products.
+ e.g. $products->removeOrderDetails($orderDetails)
+
+ NOTE: If a OrderDetails may *change* from one Products to another, answer "no".
+
+ Do you want to automatically delete orphaned App\Entity\OrderDetails objects (orphanRemoval)? (yes/no) [no]:
+
+ Eh bien : pas forcément, car on peut supprimer un produit
+ et l'avoir vendu
+ et donc garder la trace de son achat, son prix, etc. 
+
+!!!>>> génération comme toujours d'une propriété 
+id ; mais on n'en veut pas : enlever; 
+tout commme le getid qui va avec.
+MAIS plus de clef primaire, alors ; 
+ajouter un attribut qui va dire : 
+>>
+#[ORM\Id] 
+Pour $orders et $products
+Cela va générer une clef primaire composite. 
+
+
+>>> EXECUTE LE MAKE MIGRATION
+>>
+symfony console make:migration
+
+ERROR>>>
+PS C:\wamp64\www\01_nouvelle_techno\II-01-ecommerce> symfony console make:migration 
+
+In ExceptionConverter.php line 67:
+                                                                                                                           
+  An exception occurred while executing a query: SQLSTATE[42S22]: Column not found: 1054 Champ 'x.TABLE_NAME' inconnu da   
+  ns on clause                                                                                                             
+                                                                                                                           
+
+In Exception.php line 28:
+
+  SQLSTATE[42S22]: Column not found: 1054 Champ 'x.TABLE_NAME' inconnu dans on clause  
+
+
+In Statement.php line 130:
+
+  SQLSTATE[42S22]: Column not found: 1054 Champ 'x.TABLE_NAME' inconnu dans on clause  
+
+
+make:migration
+
+
+<<<ERROR
+
+<<<03
+
+
+
+!!>>> 
+
+ne pas oublier la meta pour le responsive : 
+
+<meta name ="viewport" content ="width=device-width, initial-scale=1.0">
+<link rel="icon" href="">

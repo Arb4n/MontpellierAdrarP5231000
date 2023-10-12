@@ -1,0 +1,2 @@
+alt+ shift+f : indentation auto 
+alt+z : afficher un code trop long sur plusieurs lignes 
