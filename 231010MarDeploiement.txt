@@ -1,0 +1,60 @@
+DEPLOIEMENT 
+
+>>> cf. 
+https://filezilla-project.org/download.php?type=client
+
+Version client sans manuel - windows 
+
+>>> install
+
+
+>>>
+hote : 
+nom du serveru distant
+
+utilisateur:
+celui qui aura été défini ici
+
+>>
+hote > adresse ip
+
+nom utilisateur 
+mdp 
+↓
+connecté, affiche un certificat. 
+
+paramétrable : path à décider, quel utilisateur peut accéder, en read only ou non, etc. 
+
+dans la fenetre de droite, separation des fichiers de l'app en deux : 
+en haut, ce qui est en ligne, 
+en bas, ce qui est en local. 
+
+!!!>>> ne pas oublier : changer la var d'environnement de dev à prod 
+
+
+
+>>> SSH >>>
+cle qui permet de se connecter où qu'on soit 
+ssh + mdp
+SSH : plus de rapidité que sur filezilla 
+
+>>
+rm -rf nom_du_fichier/
+
+>>
+wget adresse_ip
+
+pour se connecter en ssh : 
+extension vs code : remote ssh 
+tunnel ssh
+
+
+
+service informatique - mairie de frontignan
+
+poznati
+
+
+nukium
+
+
