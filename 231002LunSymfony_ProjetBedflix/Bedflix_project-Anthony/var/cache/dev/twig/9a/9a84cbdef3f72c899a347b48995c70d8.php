@@ -25,6 +25,7 @@ class __TwigTemplate_05713b4269148040bf0ed3db7fdd2d23 extends Template
         $this->source = $this->getSourceContext();
 
         $this->blocks = [
+            'stylesheets' => [$this, 'block_stylesheets'],
             'title' => [$this, 'block_title'],
             'body' => [$this, 'block_body'],
         ];
@@ -55,7 +56,43 @@ class __TwigTemplate_05713b4269148040bf0ed3db7fdd2d23 extends Template
 
     }
 
-    // line 3
+    // line 5
+    public function block_stylesheets($context, array $blocks = [])
+    {
+        $macros = $this->macros;
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "stylesheets"));
+
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "stylesheets"));
+
+        // line 6
+        echo "
+\t<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">
+\t<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>
+\t<link
+\thref=\"https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap\" rel=\"stylesheet\">
+
+\t";
+        // line 13
+        echo "
+
+\t<link rel=\"stylesheet\" href=\"";
+        // line 15
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("css/index.css"), "html", null, true);
+        echo "\">
+
+
+";
+        
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
+
+        
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
+
+    }
+
+    // line 23
     public function block_title($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -74,7 +111,7 @@ class __TwigTemplate_05713b4269148040bf0ed3db7fdd2d23 extends Template
 
     }
 
-    // line 7
+    // line 27
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -84,7 +121,7 @@ class __TwigTemplate_05713b4269148040bf0ed3db7fdd2d23 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
-        // line 8
+        // line 28
         echo "
 
 <div class=\"example-wrapper\">
@@ -93,27 +130,27 @@ class __TwigTemplate_05713b4269148040bf0ed3db7fdd2d23 extends Template
 
 <div>
     ";
-        // line 16
+        // line 36
         echo "</div>
 
 
 
 ";
-        // line 23
+        // line 43
         echo "
 <div>
 ";
-        // line 26
+        // line 46
         echo "</div>
 
 <div>
 ";
-        // line 30
+        // line 50
         echo "</div>
 
 <div>
 ";
-        // line 34
+        // line 54
         echo "</div>
 
 </div>
@@ -138,12 +175,32 @@ class __TwigTemplate_05713b4269148040bf0ed3db7fdd2d23 extends Template
 
     public function getDebugInfo()
     {
-        return array (  117 => 34,  112 => 30,  107 => 26,  103 => 23,  97 => 16,  88 => 8,  78 => 7,  59 => 3,  36 => 1,);
+        return array (  154 => 54,  149 => 50,  144 => 46,  140 => 43,  134 => 36,  125 => 28,  115 => 27,  96 => 23,  82 => 15,  78 => 13,  70 => 6,  60 => 5,  37 => 1,);
     }
 
     public function getSourceContext()
     {
         return new Source("{% extends 'base.html.twig' %}
+
+
+{# CSS>>> #}
+{% block stylesheets %}
+
+\t<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">
+\t<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>
+\t<link
+\thref=\"https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap\" rel=\"stylesheet\">
+
+\t{# <link rel=\"stylesheet\" href=\"{{asset ('css/login.css')}}\"> #}
+
+
+\t<link rel=\"stylesheet\" href=\"{{ asset('css/index.css') }}\">
+
+
+{% endblock %}
+
+
+
 
 {% block title %}Accueil{% endblock %}
 

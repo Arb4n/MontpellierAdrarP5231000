@@ -26,6 +26,7 @@ class __TwigTemplate_522617cdd1548be606f63f93b92ed3a9 extends Template
 
         $this->blocks = [
             'stylesheets' => [$this, 'block_stylesheets'],
+            'css' => [$this, 'block_css'],
             'title' => [$this, 'block_title'],
             'body' => [$this, 'block_body'],
         ];
@@ -70,18 +71,14 @@ class __TwigTemplate_522617cdd1548be606f63f93b92ed3a9 extends Template
         echo "
 \t<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">
 \t<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>
-\t<link
-\thref=\"https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap\" rel=\"stylesheet\">
+\t<link href=\"https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap\" rel=\"stylesheet\">
 
-\t";
+
+";
         // line 13
+        echo "\t";
+        // line 14
         echo "
-
-\t<link rel=\"stylesheet\" href=\"";
-        // line 15
-        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("css/login.css"), "html", null, true);
-        echo "\">
-
 
 ";
         
@@ -92,7 +89,31 @@ class __TwigTemplate_522617cdd1548be606f63f93b92ed3a9 extends Template
 
     }
 
-    // line 21
+    // line 17
+    public function block_css($context, array $blocks = [])
+    {
+        $macros = $this->macros;
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "css"));
+
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "css"));
+
+        // line 18
+        echo "<link rel=\"stylesheet\" href=\"";
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("css/login.css"), "html", null, true);
+        echo "\">
+
+";
+        
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
+
+        
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
+
+    }
+
+    // line 24
     public function block_title($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -112,7 +133,7 @@ class __TwigTemplate_522617cdd1548be606f63f93b92ed3a9 extends Template
 
     }
 
-    // line 24
+    // line 27
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -122,80 +143,325 @@ class __TwigTemplate_522617cdd1548be606f63f93b92ed3a9 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
-        // line 25
+        // line 28
         echo "\t<style>
 \t\tbody {
-\t\t\tbackground-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(255, 255, 255, 0.6)), 
-            url(\"https: //assets.nflxext.com/ffe/siteui/vlv3/9db4a880-3034-4e98-bdea-5d983e86bf52/e51f7928-e078-4d74-95ef-15815021f579/FR-fr-20230925-popsignuptwoweeks-perspective_alpha_website_small.jpg\"), 
-url(\"public/assets/img_login/FR-fr-20230925-popsignuptwoweeks-perspective_alpha_website_small.jpg\");
+\t\t\tbackground-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(10, 10, 10, 0.2)), url(\"https://assets.nflxext.com/ffe/siteui/vlv3/ab180a27-b661-44d7-a6d9-940cb32f2f4a/c0f30a65-c9b4-4baf-85f1-b6f2b5ae5de8/FR-fr-20231009-popsignuptwoweeks-perspective_alpha_website_small.jpg\");
+
 
 \t\t\tfont-family: 'Roboto', sans-serif;
 \t\t\tfont-style: normal;
 \t\t\t/* object-fit: cover; */
 \t\t\tbackground-size: cover;
 
-            
+
 \t\t}
+
+\t\t* {
+\t\t\tfont-family: 'Roboto', sans-serif;
+\t\t\tfont-style: normal;
+\t\t\t
+\t\t}
+
+\t\t/* body { */
+\t\t/* background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(255, 255, 255, 0.6)),
+        url(\"https: //assets.nflxext.com/ffe/siteui/vlv3/9db4a880-3034-4e98-bdea-5d983e86bf52/e51f7928-e078-4d74-95ef-15815021f579/FR-fr-20230925-popsignuptwoweeks-perspective_alpha_website_small.jpg\"),
+        url(\"../../public/assets/img_login/FR-fr-20230925-popsignuptwoweeks-perspective_alpha_website_small.jpg\"); */
+\t\t/* background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(46, 46, 44, 0.6)),
+            url(\"";
+        // line 52
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("../../public/assets/img_login/FR-fr-20230925-popsignuptwoweeks-perspective_alpha_website_small.jpg"), "html", null, true);
+        echo "\");
+
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    /* object-fit: cover; */
+\t\t/* background-size: cover;
+} */
+
+\t\t/* CSS pour centrer la login-zone */
+\t\t";
+        // line 77
+        echo "
+\t\t/* HEADER */
+
+
+\t\t/* CSS pour le header */
+\t\t/* .header-login {
+    text-align: left;
+    /* Aligner le contenu du header à gauche */
+\t\t/* padding: 10px; */
+\t\t/* Ajouter un peu d'espacement autour de l'image */
+\t\t/* display: flex; */
+\t\t/* justify-content: flex-start; */
+\t\t/* } */
+\t\t .header-login img {
+\t\t\twidth: 150px;
+\t\t\t/* Largeur de l'image */
+\t\t\theight: auto;
+\t\t\t/* Ajuster la hauteur de l'image en conséquence */
+\t\t\t/* position:relative; */
+\t\t}
+
+
+\t\t.header-login {
+\t\t\ttext-align: left;
+\t\t\tdisplay: flex;
+\t\t\tjustify-content: flex-start;
+\t\t\tmargin-top: 1%;
+\t\t\tmargin-left: 1%;
+\t\t\tmargin-bottom: 1%;
+\t\t\twidth: 100%;
+\t\t\tposition: relative;
+\t\t\tz-index: 1;
+\t\t}
+  ";
+        // line 120
+        echo "\t\t/* FORMULAIRE */
+
+\t\t/* form {
+    background-color: #fff;
+    /* Couleur de fond du formulaire */
+\t\t/* padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); */
+\t\t/* Ombre pour le formulaire */
+\t\t/* text-align: center;
+} */
+
+
+\t\t/* @media only screen and (min-width:360px) { */
+
+
+\t\t.login-zone {
+\t\t\tbackground-color: rgba(0, 0, 0, 0.8);
+\t\t\t/* Couleur noire avec une transparence de 70% */
+\t\t\tposition: relative;
+\t\t\ttop: 0;
+\t\t\tbottom: 0;
+\t\t\twidth: 50%;
+\t\t\theight: auto;
+\t\t\tpadding: 5em;
+\t\t\tmargin-top: 10%;
+\tmargin-right: 60%;
+\tmargin-bottom: 1%;
+\tmargin-left: 30%;
+\t\t\t/* left: 0;
+    right: 0; */
+\t\t\tdisplay: flex;
+\t\t\tjustify-content: center;
+\t\t\talign-items: center;
+\t\t\t/* Mettre au 1er plan */
+\t\t\tz-index: 1;
+\t\t\twidth: 20em;
+\t\t\tborder-radius: 5px;
+\t\t\tcolor: white;
+\t\t\ttext-size-adjust: auto;
+\t\t}
+
+\t\t.login-zone {
+\t\t\t/* ... Other styles ... */
+\t\t\tdisplay: flex;
+\t\t\tflex-direction: column;
+\t\t\tjustify-content: flex-start;
+\t\t\t/* Align items to the top horizontally */
+\t\t\talign-items: flex-start;
+\t\t\t/* Align items to the top vertically */
+\t\t\t/* overflow:inherit */
+\t\t\t/* Masquer le contenu dépassant du conteneur */
+\t\t\t/* Utiliser la flexbox pour centrer verticalement et horizontalement */
+\t\t\t/* Disposer les éléments verticalement */
+\t\t\tpadding-bottom: 10%;
+\t\t}
+
+
+
+\t\t/* } */
+
+\t\t/* CSS for button and input elements */
+\t\t.login-button,
+\t\tinput[type=\"email\"],
+\t\tinput[type=\"password\"] {
+\t\t\twidth: 100%;
+\t\t\tpadding: 10px;
+\t\t\tmargin: 10px;
+\t\t\tbox-sizing: border-box;
+\t\t}
+
+\t\t.login-title {
+\t\t\tfont-size: xx-large;
+\t\t\tfont-weight: 900;
+\t\t}
+
+
+\t\tinput {
+\t\t\tbackground-color: rgb(69, 67, 67);
+\t\t\tborder-radius: 5px;
+\t\t\tborder-style: none;
+\t\t\tfont-weight: bold;
+\t\t\tcolor: white;
+\t\t}
+\t\tinput::placeholder {
+\t\t\tcolor: rgb(172, 163, 163); /* Other styles you want to apply */
+\t\t}
+\t\t.login-button {
+\t\t\tmax-width: 100%;
+\t\t\twidth: 100%;
+\t\t\tcolor: white;
+\t\t\tbackground-color: red;
+\t\t\tfont-weight: bold;
+\t\t\tfont-size: 20px;
+
+\t\t\tborder-radius: 5px;
+\t\t\tcursor: pointer;
+\t\t\tborder-style: none;
+
+\t\t}
+\t\t.remember {
+\t\t\tbackground-color: black;
+\t\t\tcolor: rgb(105, 101, 101);
+\t\t\tpadding-top: 5%;
+\t\t\tpadding-bottom: 10%;
+\t\t\tpadding-right: 10%;
+\t\t\tborder-radius: 1px;
+\t\t}
+
+\t\t.login-visit {
+\t\t\tdisplay: flex;
+\t\t\tflex-direction: column;
+\t\t\tjustify-content: space-between;
+\t\t\tpadding: 1%;
+\t\t\ttext-size-adjust: auto;
+\t\t\toverflow: hidden;
+
+\t\t\tcolor: rgb(105, 101, 101);
+\t\t\tborder-radius: 1px;
+\t\t\t/* Masquer le contenu dépassant du conteneur */
+\t\t}
+
+
+\t\t/* FOOTER */
+\t\t/* CSS pour placer le footer en bas */
+\t\tfooter {
+\t\t\tposition: relative;
+\t\t\t/* Position absolue pour s'assurer que le footer reste en bas */
+\t\t\tbottom: 0;
+\t\t\tmargin-top: 20%;
+\t\t\tmargin-bottom: 0;
+\t\t\tmargin-left: 0;
+\t\t\tpadding: 3% 3% 3% 10%;
+\t\t\t/* Coller le footer en bas */
+\t\t\twidth: 100%;
+\t\t\t/* Prendre la largeur complète de la vue */
+\t\t\tbackground-color: rgba(0, 0, 0, 0.8);
+\t\t\tcolor: rgb(105, 101, 101);
+\t\t\t/* z-index: 1; */
+
+
+\t\t}
+
+\t\tfooter div {
+\t\t\tmargin: 0;
+\t\t}
+
+\t\t.services div {
+\t\t\t/* display: flex;
+    align-items: center;
+    justify-content: space-around;
+    align-content: flex-start; */
+\t\t\t/* Use space-around to evenly distribute space between links */
+\t\t\tmargin: 1em;
+\t\t\t/* Adjust the top margin for additional spacing */
+\t\t}
+
+\t\t.services div a {
+\t\t\tmargin: 1em 1em 1em 0;
+
+\t\t}
+
+\t\t.language-select select {
+\t\t\tbackground-color: black;
+\t\t\tcolor: rgb(105, 101, 101);
+\t\t\tpadding: 1%;
+\t\t\tborder-radius: 1px;
+\t\t}
+
+\t\t/* .services {
+display: flex;
+display: flex;
+    align-items: center;
+    justify-content: space-around;
+} */
+\t\t/* html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+} */
+
+
+ 
+
 \t</style>
 \t<header class=\"header-login\">
 \t\t";
-        // line 41
+        // line 308
         echo "\t\t<!-- <img src=\"\"> -->
-\t<img class=\"adrar-classrooms-img\" src=\"";
-        // line 42
+\t<img class=\"bedflix-header-img\" src=\"";
+        // line 309
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/img_login/bedflix.png"), "html", null, true);
         echo "\" alt=\"Image\" width=\"200\" height=\"150\"> </header>
 
 \t<form method=\"POST\" action=\"login.php\">
 
 \t\t";
-        // line 46
-        if ((isset($context["error"]) || array_key_exists("error", $context) ? $context["error"] : (function () { throw new RuntimeError('Variable "error" does not exist.', 46, $this->source); })())) {
-            // line 47
+        // line 313
+        if ((isset($context["error"]) || array_key_exists("error", $context) ? $context["error"] : (function () { throw new RuntimeError('Variable "error" does not exist.', 313, $this->source); })())) {
+            // line 314
             echo "\t\t\t<div class=\"alert alert-danger\">";
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\TranslationExtension']->trans(twig_get_attribute($this->env, $this->source, (isset($context["error"]) || array_key_exists("error", $context) ? $context["error"] : (function () { throw new RuntimeError('Variable "error" does not exist.', 47, $this->source); })()), "messageKey", [], "any", false, false, false, 47), twig_get_attribute($this->env, $this->source, (isset($context["error"]) || array_key_exists("error", $context) ? $context["error"] : (function () { throw new RuntimeError('Variable "error" does not exist.', 47, $this->source); })()), "messageData", [], "any", false, false, false, 47), "security"), "html", null, true);
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\TranslationExtension']->trans(twig_get_attribute($this->env, $this->source, (isset($context["error"]) || array_key_exists("error", $context) ? $context["error"] : (function () { throw new RuntimeError('Variable "error" does not exist.', 314, $this->source); })()), "messageKey", [], "any", false, false, false, 314), twig_get_attribute($this->env, $this->source, (isset($context["error"]) || array_key_exists("error", $context) ? $context["error"] : (function () { throw new RuntimeError('Variable "error" does not exist.', 314, $this->source); })()), "messageData", [], "any", false, false, false, 314), "security"), "html", null, true);
             echo "</div>
 \t\t";
         }
-        // line 49
+        // line 316
         echo "
 \t\t";
-        // line 50
-        if (twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 50, $this->source); })()), "user", [], "any", false, false, false, 50)) {
-            // line 51
+        // line 317
+        if (twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 317, $this->source); })()), "user", [], "any", false, false, false, 317)) {
+            // line 318
             echo "\t\t\t<div class=\"mb-3\">
 \t\t\t\tYou are logged in as
 \t\t\t\t";
-            // line 53
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 53, $this->source); })()), "user", [], "any", false, false, false, 53), "userIdentifier", [], "any", false, false, false, 53), "html", null, true);
+            // line 320
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 320, $this->source); })()), "user", [], "any", false, false, false, 320), "userIdentifier", [], "any", false, false, false, 320), "html", null, true);
             echo ",
 \t\t\t\t<a href=\"";
-            // line 54
+            // line 321
             echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_logout");
             echo "\">Logout</a>
 \t\t\t</div>
 \t\t";
         }
-        // line 57
+        // line 324
         echo "
 \t\t";
-        // line 72
+        // line 339
         echo "
 \t\t<div
 \t\t\tclass=\"login-zone\">
 \t\t\t<!-- formulaire  
-\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t        S'identifier 
-\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t        email input 
-\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t        password input
-\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t        id button
-\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t        -->
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t        S'identifier 
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t        email input 
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t        password input
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t        id button
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t        -->
 \t\t\t<form method=\"POST\" action=\"login.php\">
 \t\t\t\t<div class=\"login-title\">S'identifier</div>
 \t\t\t\t<div>
 \t\t\t\t\t<label for=\"inputEmail\"></label>
 \t\t\t\t\t<input type=\"email\" value=\"";
-        // line 85
-        echo twig_escape_filter($this->env, (isset($context["last_username"]) || array_key_exists("last_username", $context) ? $context["last_username"] : (function () { throw new RuntimeError('Variable "last_username" does not exist.', 85, $this->source); })()), "html", null, true);
+        // line 352
+        echo twig_escape_filter($this->env, (isset($context["last_username"]) || array_key_exists("last_username", $context) ? $context["last_username"] : (function () { throw new RuntimeError('Variable "last_username" does not exist.', 352, $this->source); })()), "html", null, true);
         echo "\" name=\"email\" id=\"inputEmail\" class=\"form-control\" placeholder=\"Email\" required autofocus>
 
 
@@ -213,7 +479,7 @@ url(\"public/assets/img_login/FR-fr-20230925-popsignuptwoweeks-perspective_alpha
 \t\t\t\t\t<input type=\"checkbox\" id=\"remember\" name=\"remember\" checked/>
 \t\t\t\t\t<label for=\"remember\">Se souvenir de moi</label>
 \t\t\t\t\t<!-- TODO : relier à la page d'aide -->
-\t\t\t\t\t<a href=\"\">Besoin d'aide?</a>
+\t\t\t\t\t<a href=\"\">\tBesoin d'aide?</a>
 \t\t\t\t</div>
 \t\t\t\t<div class=\"login-visit\">
 \t\t\t\t\t<div>
@@ -222,10 +488,11 @@ url(\"public/assets/img_login/FR-fr-20230925-popsignuptwoweeks-perspective_alpha
 \t\t\t\t\t\t<!-- Todo : relier à page inscription -->
 \t\t\t\t\t\t<a href=\"\">Inscrivez-vous.
 \t\t\t\t\t\t</a>
+\t\t\t\t\t<br></br>
 \t\t\t\t\t</div>
 \t\t\t\t\t<div>
 \t\t\t\t\t\tCette page est protégée par Google reCAPTCHA
-\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t                    pour nous assurer que vous n'êtes plus un robot.
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t                    pour nous assurer que vous n'êtes plus un robot.
 \t\t\t\t\t</div>
 \t\t\t\t\t<div>
 \t\t\t\t\t\t<!-- TODO : relier à une page \"en savoir plus\" -->
@@ -287,7 +554,7 @@ url(\"public/assets/img_login/FR-fr-20230925-popsignuptwoweeks-perspective_alpha
 
     public function getDebugInfo()
     {
-        return array (  198 => 85,  183 => 72,  180 => 57,  174 => 54,  170 => 53,  166 => 51,  164 => 50,  161 => 49,  155 => 47,  153 => 46,  146 => 42,  143 => 41,  126 => 25,  116 => 24,  96 => 21,  82 => 15,  78 => 13,  70 => 6,  60 => 5,  37 => 1,);
+        return array (  464 => 352,  449 => 339,  446 => 324,  440 => 321,  436 => 320,  432 => 318,  430 => 317,  427 => 316,  421 => 314,  419 => 313,  412 => 309,  409 => 308,  220 => 120,  185 => 77,  173 => 52,  147 => 28,  137 => 27,  117 => 24,  103 => 18,  93 => 17,  81 => 14,  79 => 13,  71 => 6,  61 => 5,  38 => 1,);
     }
 
     public function getSourceContext()
@@ -300,16 +567,19 @@ url(\"public/assets/img_login/FR-fr-20230925-popsignuptwoweeks-perspective_alpha
 
 \t<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">
 \t<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>
-\t<link
-\thref=\"https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap\" rel=\"stylesheet\">
+\t<link href=\"https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap\" rel=\"stylesheet\">
 
+
+{# <link rel=\"stylesheet\" href=\"{{asset('../../public/css/login.css')}}\"> #}
 \t{# <link rel=\"stylesheet\" href=\"{{asset ('css/login.css')}}\"> #}
 
 
-\t<link rel=\"stylesheet\" href=\"{{ asset('css/login.css') }}\">
-
+{% endblock %}
+{% block css %}
+<link rel=\"stylesheet\" href=\"{{asset ('css/login.css')}}\">
 
 {% endblock %}
+
 
 
 {% block title %}Login to the Bedflix
@@ -318,22 +588,286 @@ url(\"public/assets/img_login/FR-fr-20230925-popsignuptwoweeks-perspective_alpha
 {% block body %}
 \t<style>
 \t\tbody {
-\t\t\tbackground-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(255, 255, 255, 0.6)), 
-            url(\"https: //assets.nflxext.com/ffe/siteui/vlv3/9db4a880-3034-4e98-bdea-5d983e86bf52/e51f7928-e078-4d74-95ef-15815021f579/FR-fr-20230925-popsignuptwoweeks-perspective_alpha_website_small.jpg\"), 
-url(\"public/assets/img_login/FR-fr-20230925-popsignuptwoweeks-perspective_alpha_website_small.jpg\");
+\t\t\tbackground-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(10, 10, 10, 0.2)), url(\"https://assets.nflxext.com/ffe/siteui/vlv3/ab180a27-b661-44d7-a6d9-940cb32f2f4a/c0f30a65-c9b4-4baf-85f1-b6f2b5ae5de8/FR-fr-20231009-popsignuptwoweeks-perspective_alpha_website_small.jpg\");
+
 
 \t\t\tfont-family: 'Roboto', sans-serif;
 \t\t\tfont-style: normal;
 \t\t\t/* object-fit: cover; */
 \t\t\tbackground-size: cover;
 
-            
+
 \t\t}
+
+\t\t* {
+\t\t\tfont-family: 'Roboto', sans-serif;
+\t\t\tfont-style: normal;
+\t\t\t
+\t\t}
+
+\t\t/* body { */
+\t\t/* background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(255, 255, 255, 0.6)),
+        url(\"https: //assets.nflxext.com/ffe/siteui/vlv3/9db4a880-3034-4e98-bdea-5d983e86bf52/e51f7928-e078-4d74-95ef-15815021f579/FR-fr-20230925-popsignuptwoweeks-perspective_alpha_website_small.jpg\"),
+        url(\"../../public/assets/img_login/FR-fr-20230925-popsignuptwoweeks-perspective_alpha_website_small.jpg\"); */
+\t\t/* background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(46, 46, 44, 0.6)),
+            url(\"{{ asset('../../public/assets/img_login/FR-fr-20230925-popsignuptwoweeks-perspective_alpha_website_small.jpg') }}\");
+
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    /* object-fit: cover; */
+\t\t/* background-size: cover;
+} */
+
+\t\t/* CSS pour centrer la login-zone */
+\t\t{# .body {
+\t\t\tmargin: 0;
+\t\t\t/* Réinitialiser les marges par défaut du body */
+\t\t\tpadding: 0;
+\t\t\t/* Réinitialiser les rembourrages par défaut du body */
+\t\t\theight: 100vh;
+\t\t\t/* Prendre la hauteur complète de la vue */
+\t\t\tdisplay: flex;
+\t\t\t/* Utiliser la flexbox pour centrer verticalement et horizontalement */
+\t\t\tflex-direction: column;
+\t\t\t/* Disposer les éléments verticalement */
+\t\t\tjustify-content: center;
+\t\t\t/* Centrer verticalement */
+\t\t\talign-items: center;
+\t\t\t/* Centrer horizontalement */
+\t\t} #}
+
+\t\t/* HEADER */
+
+
+\t\t/* CSS pour le header */
+\t\t/* .header-login {
+    text-align: left;
+    /* Aligner le contenu du header à gauche */
+\t\t/* padding: 10px; */
+\t\t/* Ajouter un peu d'espacement autour de l'image */
+\t\t/* display: flex; */
+\t\t/* justify-content: flex-start; */
+\t\t/* } */
+\t\t .header-login img {
+\t\t\twidth: 150px;
+\t\t\t/* Largeur de l'image */
+\t\t\theight: auto;
+\t\t\t/* Ajuster la hauteur de l'image en conséquence */
+\t\t\t/* position:relative; */
+\t\t}
+
+
+\t\t.header-login {
+\t\t\ttext-align: left;
+\t\t\tdisplay: flex;
+\t\t\tjustify-content: flex-start;
+\t\t\tmargin-top: 1%;
+\t\t\tmargin-left: 1%;
+\t\t\tmargin-bottom: 1%;
+\t\t\twidth: 100%;
+\t\t\tposition: relative;
+\t\t\tz-index: 1;
+\t\t}
+  {# .header-login {
+        text-align: left;
+        display: flex;
+        justify-content: flex-start;
+        position: relative;
+        top: 0;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        z-index: 1;
+    } #}
+\t\t/* FORMULAIRE */
+
+\t\t/* form {
+    background-color: #fff;
+    /* Couleur de fond du formulaire */
+\t\t/* padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); */
+\t\t/* Ombre pour le formulaire */
+\t\t/* text-align: center;
+} */
+
+
+\t\t/* @media only screen and (min-width:360px) { */
+
+
+\t\t.login-zone {
+\t\t\tbackground-color: rgba(0, 0, 0, 0.8);
+\t\t\t/* Couleur noire avec une transparence de 70% */
+\t\t\tposition: relative;
+\t\t\ttop: 0;
+\t\t\tbottom: 0;
+\t\t\twidth: 50%;
+\t\t\theight: auto;
+\t\t\tpadding: 5em;
+\t\t\tmargin-top: 10%;
+\tmargin-right: 60%;
+\tmargin-bottom: 1%;
+\tmargin-left: 30%;
+\t\t\t/* left: 0;
+    right: 0; */
+\t\t\tdisplay: flex;
+\t\t\tjustify-content: center;
+\t\t\talign-items: center;
+\t\t\t/* Mettre au 1er plan */
+\t\t\tz-index: 1;
+\t\t\twidth: 20em;
+\t\t\tborder-radius: 5px;
+\t\t\tcolor: white;
+\t\t\ttext-size-adjust: auto;
+\t\t}
+
+\t\t.login-zone {
+\t\t\t/* ... Other styles ... */
+\t\t\tdisplay: flex;
+\t\t\tflex-direction: column;
+\t\t\tjustify-content: flex-start;
+\t\t\t/* Align items to the top horizontally */
+\t\t\talign-items: flex-start;
+\t\t\t/* Align items to the top vertically */
+\t\t\t/* overflow:inherit */
+\t\t\t/* Masquer le contenu dépassant du conteneur */
+\t\t\t/* Utiliser la flexbox pour centrer verticalement et horizontalement */
+\t\t\t/* Disposer les éléments verticalement */
+\t\t\tpadding-bottom: 10%;
+\t\t}
+
+
+
+\t\t/* } */
+
+\t\t/* CSS for button and input elements */
+\t\t.login-button,
+\t\tinput[type=\"email\"],
+\t\tinput[type=\"password\"] {
+\t\t\twidth: 100%;
+\t\t\tpadding: 10px;
+\t\t\tmargin: 10px;
+\t\t\tbox-sizing: border-box;
+\t\t}
+
+\t\t.login-title {
+\t\t\tfont-size: xx-large;
+\t\t\tfont-weight: 900;
+\t\t}
+
+
+\t\tinput {
+\t\t\tbackground-color: rgb(69, 67, 67);
+\t\t\tborder-radius: 5px;
+\t\t\tborder-style: none;
+\t\t\tfont-weight: bold;
+\t\t\tcolor: white;
+\t\t}
+\t\tinput::placeholder {
+\t\t\tcolor: rgb(172, 163, 163); /* Other styles you want to apply */
+\t\t}
+\t\t.login-button {
+\t\t\tmax-width: 100%;
+\t\t\twidth: 100%;
+\t\t\tcolor: white;
+\t\t\tbackground-color: red;
+\t\t\tfont-weight: bold;
+\t\t\tfont-size: 20px;
+
+\t\t\tborder-radius: 5px;
+\t\t\tcursor: pointer;
+\t\t\tborder-style: none;
+
+\t\t}
+\t\t.remember {
+\t\t\tbackground-color: black;
+\t\t\tcolor: rgb(105, 101, 101);
+\t\t\tpadding-top: 5%;
+\t\t\tpadding-bottom: 10%;
+\t\t\tpadding-right: 10%;
+\t\t\tborder-radius: 1px;
+\t\t}
+
+\t\t.login-visit {
+\t\t\tdisplay: flex;
+\t\t\tflex-direction: column;
+\t\t\tjustify-content: space-between;
+\t\t\tpadding: 1%;
+\t\t\ttext-size-adjust: auto;
+\t\t\toverflow: hidden;
+
+\t\t\tcolor: rgb(105, 101, 101);
+\t\t\tborder-radius: 1px;
+\t\t\t/* Masquer le contenu dépassant du conteneur */
+\t\t}
+
+
+\t\t/* FOOTER */
+\t\t/* CSS pour placer le footer en bas */
+\t\tfooter {
+\t\t\tposition: relative;
+\t\t\t/* Position absolue pour s'assurer que le footer reste en bas */
+\t\t\tbottom: 0;
+\t\t\tmargin-top: 20%;
+\t\t\tmargin-bottom: 0;
+\t\t\tmargin-left: 0;
+\t\t\tpadding: 3% 3% 3% 10%;
+\t\t\t/* Coller le footer en bas */
+\t\t\twidth: 100%;
+\t\t\t/* Prendre la largeur complète de la vue */
+\t\t\tbackground-color: rgba(0, 0, 0, 0.8);
+\t\t\tcolor: rgb(105, 101, 101);
+\t\t\t/* z-index: 1; */
+
+
+\t\t}
+
+\t\tfooter div {
+\t\t\tmargin: 0;
+\t\t}
+
+\t\t.services div {
+\t\t\t/* display: flex;
+    align-items: center;
+    justify-content: space-around;
+    align-content: flex-start; */
+\t\t\t/* Use space-around to evenly distribute space between links */
+\t\t\tmargin: 1em;
+\t\t\t/* Adjust the top margin for additional spacing */
+\t\t}
+
+\t\t.services div a {
+\t\t\tmargin: 1em 1em 1em 0;
+
+\t\t}
+
+\t\t.language-select select {
+\t\t\tbackground-color: black;
+\t\t\tcolor: rgb(105, 101, 101);
+\t\t\tpadding: 1%;
+\t\t\tborder-radius: 1px;
+\t\t}
+
+\t\t/* .services {
+display: flex;
+display: flex;
+    align-items: center;
+    justify-content: space-around;
+} */
+\t\t/* html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+} */
+
+
+ 
+
 \t</style>
 \t<header class=\"header-login\">
 \t\t{# <img src=\"../../public/assets/img_login/bedflix.png\"> #}
 \t\t<!-- <img src=\"\"> -->
-\t<img class=\"adrar-classrooms-img\" src=\"{{asset (\"assets/img_login/bedflix.png\")}}\" alt=\"Image\" width=\"200\" height=\"150\"> </header>
+\t<img class=\"bedflix-header-img\" src=\"{{asset (\"assets/img_login/bedflix.png\")}}\" alt=\"Image\" width=\"200\" height=\"150\"> </header>
 
 \t<form method=\"POST\" action=\"login.php\">
 
@@ -350,28 +884,28 @@ url(\"public/assets/img_login/FR-fr-20230925-popsignuptwoweeks-perspective_alpha
 \t\t{% endif %}
 
 \t\t{# <h1 class=\"h3 mb-3 font-weight-normal\">Connexion</h1>
-\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t    <label for=\"inputEmail\">Email</label>
-\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t    <input type=\"email\" value=\"{{ last_username }}\" name=\"email\" id=\"inputEmail\" class=\"form-control\" required autofocus>
-\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t    <label for=\"inputPassword\">Mot de passe</label>
-\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t    <input type=\"password\" name=\"password\" id=\"inputPassword\" class=\"form-control\"  required>
-\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t
-\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t    <input type=\"hidden\" name=\"_csrf_token\"
-\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t           value=\"{{ csrf_token('authenticate') }}\"
-\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t    >
-\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t
-\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t    <button class=\"btn btn-lg btn-primary\" type=\"submit\">
-\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t        Connexion
-\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t    </button>
-\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</form> #}
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t    <label for=\"inputEmail\">Email</label>
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t    <input type=\"email\" value=\"{{ last_username }}\" name=\"email\" id=\"inputEmail\" class=\"form-control\" required autofocus>
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t    <label for=\"inputPassword\">Mot de passe</label>
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t    <input type=\"password\" name=\"password\" id=\"inputPassword\" class=\"form-control\"  required>
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t    <input type=\"hidden\" name=\"_csrf_token\"
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t           value=\"{{ csrf_token('authenticate') }}\"
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t    >
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t    <button class=\"btn btn-lg btn-primary\" type=\"submit\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t        Connexion
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t    </button>
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</form> #}
 
 \t\t<div
 \t\t\tclass=\"login-zone\">
 \t\t\t<!-- formulaire  
-\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t        S'identifier 
-\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t        email input 
-\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t        password input
-\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t        id button
-\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t        -->
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t        S'identifier 
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t        email input 
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t        password input
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t        id button
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t        -->
 \t\t\t<form method=\"POST\" action=\"login.php\">
 \t\t\t\t<div class=\"login-title\">S'identifier</div>
 \t\t\t\t<div>
@@ -393,7 +927,7 @@ url(\"public/assets/img_login/FR-fr-20230925-popsignuptwoweeks-perspective_alpha
 \t\t\t\t\t<input type=\"checkbox\" id=\"remember\" name=\"remember\" checked/>
 \t\t\t\t\t<label for=\"remember\">Se souvenir de moi</label>
 \t\t\t\t\t<!-- TODO : relier à la page d'aide -->
-\t\t\t\t\t<a href=\"\">Besoin d'aide?</a>
+\t\t\t\t\t<a href=\"\">\tBesoin d'aide?</a>
 \t\t\t\t</div>
 \t\t\t\t<div class=\"login-visit\">
 \t\t\t\t\t<div>
@@ -402,10 +936,11 @@ url(\"public/assets/img_login/FR-fr-20230925-popsignuptwoweeks-perspective_alpha
 \t\t\t\t\t\t<!-- Todo : relier à page inscription -->
 \t\t\t\t\t\t<a href=\"\">Inscrivez-vous.
 \t\t\t\t\t\t</a>
+\t\t\t\t\t<br></br>
 \t\t\t\t\t</div>
 \t\t\t\t\t<div>
 \t\t\t\t\t\tCette page est protégée par Google reCAPTCHA
-\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t                    pour nous assurer que vous n'êtes plus un robot.
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t                    pour nous assurer que vous n'êtes plus un robot.
 \t\t\t\t\t</div>
 \t\t\t\t\t<div>
 \t\t\t\t\t\t<!-- TODO : relier à une page \"en savoir plus\" -->
