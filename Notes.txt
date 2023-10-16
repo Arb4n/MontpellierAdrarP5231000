@@ -1,3 +1,23 @@
+>>> ADDING A SUBMODULE IN A GIT REPO
+
+hint: You've added another git repository inside your current repository.
+hint: Clones of the outer repository will not contain the contents of
+hint: the embedded repository and will not know how to obtain it.
+hint: If you meant to add a submodule, use:
+hint:
+hint:   git submodule add <url> 231016projet_bedflix_groupe
+hint:
+hint: If you added this path by mistake, you can remove it from the
+hint: index with:
+hint:
+hint:   git rm --cached 231016projet_bedflix_groupe
+hint:
+hint: See "git help submodule" for more information.
+bash: commit: command not found
+
+<<< ADDING A SUBMODULE IN A GIT REPO
+
+
 230725
 Marceau — Aujourd’hui à 14:37
 @CDA34 23-01 Bonjour/re bonjour 🙂 
