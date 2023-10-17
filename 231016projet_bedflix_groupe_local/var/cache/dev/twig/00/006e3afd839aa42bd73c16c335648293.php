@@ -439,31 +439,33 @@ body {
             echo "\t\t\t<div class=\"alert alert-danger\">";
             echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\TranslationExtension']->trans(twig_get_attribute($this->env, $this->source, (isset($context["error"]) || array_key_exists("error", $context) ? $context["error"] : (function () { throw new RuntimeError('Variable "error" does not exist.', 309, $this->source); })()), "messageKey", [], "any", false, false, false, 309), twig_get_attribute($this->env, $this->source, (isset($context["error"]) || array_key_exists("error", $context) ? $context["error"] : (function () { throw new RuntimeError('Variable "error" does not exist.', 309, $this->source); })()), "messageData", [], "any", false, false, false, 309), "security"), "html", null, true);
             echo "</div>
-\t\t";
+\t\t\t";
+            // line 311
+            echo "\t\t";
         }
-        // line 311
+        // line 312
         echo "
 \t\t";
-        // line 312
-        if (twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 312, $this->source); })()), "user", [], "any", false, false, false, 312)) {
-            // line 313
+        // line 313
+        if (twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 313, $this->source); })()), "user", [], "any", false, false, false, 313)) {
+            // line 314
             echo "\t\t\t<div class=\"mb-3\">
-\t\t\t\tYou are logged in as
+\t\t\t\tVous êtes connecté en tant que : 
 \t\t\t\t";
-            // line 315
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 315, $this->source); })()), "user", [], "any", false, false, false, 315), "userIdentifier", [], "any", false, false, false, 315), "html", null, true);
+            // line 316
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 316, $this->source); })()), "user", [], "any", false, false, false, 316), "userIdentifier", [], "any", false, false, false, 316), "html", null, true);
             echo ",
 \t\t\t\t<a href=\"";
-            // line 316
+            // line 317
             echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_logout");
-            echo "\">Logout</a>
+            echo "\">Déconnexion</a>
 \t\t\t</div>
 \t\t";
         }
-        // line 319
+        // line 320
         echo "
 \t\t";
-        // line 334
+        // line 335
         echo "
 \t\t<div
 \t\t\tclass=\"login-zone\">
@@ -478,8 +480,8 @@ body {
 \t\t\t\t<div>
 \t\t\t\t\t<label for=\"inputEmail\"></label>
 \t\t\t\t\t<input type=\"email\" value=\"";
-        // line 347
-        echo twig_escape_filter($this->env, (isset($context["last_username"]) || array_key_exists("last_username", $context) ? $context["last_username"] : (function () { throw new RuntimeError('Variable "last_username" does not exist.', 347, $this->source); })()), "html", null, true);
+        // line 348
+        echo twig_escape_filter($this->env, (isset($context["last_username"]) || array_key_exists("last_username", $context) ? $context["last_username"] : (function () { throw new RuntimeError('Variable "last_username" does not exist.', 348, $this->source); })()), "html", null, true);
         echo "\" name=\"email\" id=\"inputEmail\" class=\"form-control\" placeholder=\"Email\" required autofocus>
 
 
@@ -504,8 +506,9 @@ body {
 \t\t\t\t\t<div>
 \t\t\t\t\t\tPremière visite sur Netflix ?
 
-\t\t\t\t\t\t<!-- Todo : relier à page inscription -->
-\t\t\t\t\t\t<a href=\"\">Inscrivez-vous.
+\t\t\t\t\t\t<!-- TODO : relier à page inscription -->
+\t\t\t\t\t\t<a href=\"https://127.0.0.1:8000/inscription\">Inscrivez-vous.
+
 \t\t\t\t\t\t</a>
 \t\t\t\t\t\t<br></br>
 \t\t\t\t</div>
@@ -573,7 +576,7 @@ body {
 
     public function getDebugInfo()
     {
-        return array (  482 => 347,  467 => 334,  464 => 319,  458 => 316,  454 => 315,  450 => 313,  448 => 312,  445 => 311,  439 => 309,  437 => 308,  427 => 302,  393 => 269,  173 => 51,  147 => 27,  137 => 26,  117 => 23,  103 => 18,  93 => 17,  81 => 14,  79 => 13,  71 => 6,  61 => 5,  38 => 1,);
+        return array (  484 => 348,  469 => 335,  466 => 320,  460 => 317,  456 => 316,  452 => 314,  450 => 313,  447 => 312,  444 => 311,  439 => 309,  437 => 308,  427 => 302,  393 => 269,  173 => 51,  147 => 27,  137 => 26,  117 => 23,  103 => 18,  93 => 17,  81 => 14,  79 => 13,  71 => 6,  61 => 5,  38 => 1,);
     }
 
     public function getSourceContext()
@@ -887,13 +890,14 @@ body {
 
 \t\t{% if error %}
 \t\t\t<div class=\"alert alert-danger\">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+\t\t\t{# ↑\t\t↑\t\tTODO : faire affiche un message d'erreur (\"informations invalides ou al. ) \t\t↑\t\t↑ #}
 \t\t{% endif %}
 
 \t\t{% if app.user %}
 \t\t\t<div class=\"mb-3\">
-\t\t\t\tYou are logged in as
+\t\t\t\tVous êtes connecté en tant que : 
 \t\t\t\t{{ app.user.userIdentifier }},
-\t\t\t\t<a href=\"{{ path('app_logout') }}\">Logout</a>
+\t\t\t\t<a href=\"{{ path('app_logout') }}\">Déconnexion</a>
 \t\t\t</div>
 \t\t{% endif %}
 
@@ -948,8 +952,9 @@ body {
 \t\t\t\t\t<div>
 \t\t\t\t\t\tPremière visite sur Netflix ?
 
-\t\t\t\t\t\t<!-- Todo : relier à page inscription -->
-\t\t\t\t\t\t<a href=\"\">Inscrivez-vous.
+\t\t\t\t\t\t<!-- TODO : relier à page inscription -->
+\t\t\t\t\t\t<a href=\"https://127.0.0.1:8000/inscription\">Inscrivez-vous.
+
 \t\t\t\t\t\t</a>
 \t\t\t\t\t\t<br></br>
 \t\t\t\t</div>

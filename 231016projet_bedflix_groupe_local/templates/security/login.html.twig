@@ -307,13 +307,14 @@ body {
 
 		{% if error %}
 			<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+			{# ↑		↑		TODO : faire affiche un message d'erreur ("informations invalides ou al. ) 		↑		↑ #}
 		{% endif %}
 
 		{% if app.user %}
 			<div class="mb-3">
-				You are logged in as
+				Vous êtes connecté en tant que : 
 				{{ app.user.userIdentifier }},
-				<a href="{{ path('app_logout') }}">Logout</a>
+				<a href="{{ path('app_logout') }}">Déconnexion</a>
 			</div>
 		{% endif %}
 
@@ -368,8 +369,9 @@ body {
 					<div>
 						Première visite sur Netflix ?
 
-						<!-- Todo : relier à page inscription -->
-						<a href="">Inscrivez-vous.
+						<!-- TODO : relier à page inscription -->
+						<a href="https://127.0.0.1:8000/inscription">Inscrivez-vous.
+
 						</a>
 						<br></br>
 				</div>
