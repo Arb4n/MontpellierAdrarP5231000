@@ -1,0 +1,46 @@
+>>
+
+try {
+  instructions_try
+}
+catch (exception_var_1 if condition_1) { // non-standard
+  instructions_catch_1
+}
+…
+catch (exception_var_2) {
+  instructions_catch_2
+}
+finally {
+  instructions_finally
+}
+
+
+<<
+
+
+Yes, the code you provided is a non-standard try-catch clause with a conditional catch block. This feature is not supported by all JavaScript implementations, so it is not recommended for use in production code.
+
+The conditional catch block is useful for handling specific types of exceptions that may occur in a particular context. For example, you could use a conditional catch block to handle a specific type of error that occurs when parsing a JSON object.
+
+However, it is important to be aware of the limitations of conditional catch blocks. First, they are not supported by all JavaScript implementations. Second, they can make code more difficult to read and maintain.
+
+If you need to handle specific types of exceptions, it is generally better to use separate catch blocks for each type of exception. This will make your code more readable and maintainable.
+
+Here is an example of how to handle specific types of exceptions using separate catch blocks:
+
+JavaScript
+try {
+  // ...
+} catch (error) {
+  if (error instanceof TypeError) {
+    // Handle TypeError exceptions
+  } else if (error instanceof RangeError) {
+    // Handle RangeError exceptions
+  } else {
+    // Handle other exceptions
+  }
+}
+Utilisez le code avec précaution. En savoir plus
+This code is more readable and maintainable than the code with the conditional catch block. It is also more portable, as it will work on all JavaScript implementations.
+
+If you are using a JavaScript implementation that supports conditional catch blocks, you can use them sparingly. However, it is generally better to use separate catch blocks for each type of exception.
