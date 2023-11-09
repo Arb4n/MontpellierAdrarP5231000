@@ -1,0 +1,451 @@
+https://nodejs.org/en/download
+Node.js
+Download | Node.js
+Node.js® is a JavaScript runtime built on Chrome's V8 JavaScript engine.
+Image
+tester la version :
+node -v
+Mathieu MITH — 06/11/2023 09:29
+Initialiser le projet :
+npm init -y
+installer l'environnement Cypress dans votre projet :
+npm install -D cypress
+documentation de cypress :
+https://docs.cypress.io/guides/overview/why-cypress
+Mathieu MITH — 06/11/2023 09:41
+modifier le fichier package.json :
+"scripts": {
+    "test": "cypress open"
+  },
+tester avec :
+npm run test
+Mathieu MITH — 06/11/2023 10:21
+Avec l'aide de la documentation de l'API de cypress vous allez réécrire le test spec.cy.js (qui se trouve dans le dossier cypress/e2e/) :
+-récupérer  5 inputs de type texte, (cy.get)
+-ajouter des valeurs à l'intérieur de chaque input (en utilisant type),
+-récupérer le bouton submit et appeler la fonction (click) qui simule un clic sur l'élément.
+Tester en relancant :
+npm run test
+ 
+StevenD — 06/11/2023 10:23
+@Mathieu MITH On ne t'entends plus
+Mathieu MITH — 06/11/2023 10:30
+fichier .gitignore
+Type de fichier joint : unknown
+gitignore
+393 bytes
+Mathieu MITH — 06/11/2023 10:58
+Cours testing partie 1 
+Type de fichier joint : acrobat
+cours_testingv1_partie1.pdf
+1.66 MB
+Equivalent python :
+https://pypi.org/project/selenium/
+Mathieu MITH — 06/11/2023 11:09
+Bonus :
+tester le retour du message :
+"Le compte : mail@mail.fr existe déja"
+ou 
+"Le compte : mail@mail.fr a été ajouté en BDD"
+En utilisant les assertions (should) 
+Lien de la documentation :
+https://docs.cypress.io/api/commands/should 
+Mathieu MITH — 06/11/2023 11:48
+Correction test ajout de compte :
+describe('Test utilisateur', () => {
+  it('ajout de compte', () => {
+    cy.visit('https://localhost:8000/register')
+    cy.get('#register_firstname').type("Mathieu")
+    cy.get('#register_name').type("Mithridate")
+    cy.get('#register_email').type("mathieu.mith@laposte.net")
+    cy.get('#register_password_first').type("1234")
+    cy.get('#register_password_second').type("1234")
+    cy.get('#register_Ajouter').click()
+  })
+})
+ 
+Correction :
+https://github.com/mithridatem/cda_secu 
+StevenD — 06/11/2023 12:18
+@Mathieu MITH On t'entend plus
+Anthony.G — 06/11/2023 12:18
+on ne t'entend plus 
+Mathieu MITH — 06/11/2023 12:18
+je deco reco
+Mathieu MITH — 06/11/2023 12:34
+Correction test des messages dans la page :
+//version avec should :
+describe('Test utilisateur', () => {
+  it('Ajout de compte doublon', () => {
+    cy.visit('https://localhost:8000/register')
+    cy.get('#register_firstname').type("Mathieu")
+    cy.get('#register_name').type("Mithridate")
+    cy.get('#register_email').type("mathieu.mith@laposte.net")
+    cy.get('#register_password_first').type("1234")
+    cy.get('#register_password_second').type("1234")
+    cy.get('#register_Ajouter').click()
+    cy.get('strong').should("contain", "Le compte : mail@mail.fr existe déja")
+  })
+})
+//version avec des conditions et la fonction invoke
+describe('Test utilisateur', () => {
+  it('ajout de compte doublon', () => {
+    cy.visit('https://localhost:8000/register')
+    cy.get('#register_firstname').type("Mathieu")
+    cy.get('#register_name').type("Mithridate")
+    cy.get('#register_email').type("mathieu.mith@laposte.net")
+    cy.get('#register_password_first').type("1234")
+    cy.get('#register_password_second').type("1234")
+    cy.get('#register_Ajouter').click()
+    cy.get('strong').invoke("text").then((text=>{
+      if(text == "Le compte : mail@mail.fr existe déja"){
+        cy.log("Doublon")
+      }else{
+        cy.log("le compte a été ajouté en bdd")
+      }
+    }))
+  })
+})
+Mathieu MITH — 06/11/2023 13:57
+Exercice écrire une fonction et les tests liés :
+Partie 1 méthode symfony :
+Dans le controller RegisterController.php écrire une fonction qui va mettre à jour les informations de l'utilisateur :
+Dans la route /register/update/{id}
+Ajouter les paramètres ($id, Request, UserPasswordHasherInterface)
+La méthode va récupérer en POST les informations (name, firstname, email, password)
+-Créer une variable $user qui va stocker un objet utilisateur (find ($id),
+-Créer une variable $msg vide,
+-Créer une variable $form qui va stocker un formulaire,
+-Tester si le compte existe ($user) :
+Si le compte existe : 
+-Récupérer le contenu du formulaire (HandleRequest),
+-Tester si le formulaire est submit,
+Si le formulaire est submit :
+-mettre à jour les informations de l'utilisateur en BDD (flush),
+-Afficher un message ($msg = "le compte a été mis à jour ").
+_Si le compte n'existe pas :
+-Vous afficher un message d'erreur ($msg = "le compte n'existe pas") 
+
+En dernière ligne de la méthode retourner (return) :
+la méthode render (vue twig) avec le formulaire ($form) et le message ($msg).
+NB : vous pouvez utiliser le même fichier twig que pour l'ajout du compte (addUser).
+
+Partie 2 écrire les tests qui vont valider la méthode :
+-récupérer les inputs,
+-injecter des valeurs dans les inputs,
+-Cliquer sur le bouton,
+-Vérifier le message contenu :
+-> le compte à été mis à jour,
+soit -> le compte n'existe pas 
+Mathieu MITH — 06/11/2023 14:56
+Exemple d'utilisation de boucle dans les tests cypress :
+describe('test et boucle', ()=>{
+    it('boucle v1', ()=>{
+        //répéter une action plusieurs fois
+        for (let i = 0; i<10; i++){
+            cy.visit('www.google.com')
+        }
+    })
+    //répeter un test plusieurs fois
+    for(let i = 0; i<10; i++){
+        it('boucle v2', ()=>{
+            cy.visit('www.google.com')
+        })
+    }
+})
+Mathieu MITH — 06/11/2023 15:18
+Correction Partie 1 méthode updateUser :
+ #[Route("/register/update/{id}", name:"app_register_update")]
+    public function updateUser($id, Request $request, UserPasswordHasherInterface $hash){
+        $msg = "";
+        $user = $this->repo->find(UtilsService::cleanInput($id));
+        $form = $this->createForm(registerType::class, $user);
+        //tester si le compte existe
+        if($user){
+            $form->handleRequest($request);
+            //test si le formulaire est submit
+            if($form->isSubmitted() AND $form->isValid()){
+                $pass = UtilsService::cleanInput($request->request->all('register')['password']['first']);
+                $hash = $hash->hashPassword($user, $pass);
+                $user->setPassword($hash);
+                $user->setFirstname(UtilsService::cleanInput($request->request->all('register')['firstname']));
+                $user->setName(UtilsService::cleanInput($request->request->all('register')['name']));
+                $user->setEmail(UtilsService::cleanInput($request->request->all('register')['email']));
+                $this->em->flush();
+                $msg = "Le compte a été mis à jour en BDD";
+            }
+        }
+        //tester si le compte n'existe pas
+        else{
+            $msg = "le compte n'existe pas";
+        }
+        return $this->render('register/index.html.twig', [
+            'msg' => $msg,
+            'form' =>$form->createView()
+        ]);
+    }
+Mathieu MITH — 06/11/2023 16:06
+Correction Partie 2 Tests :
+describe('Test utilisateur', () => {
+  it('Modification du compte existe', () => {
+    cy.visit('https://localhost:8000/register/update/2')
+    cy.get('#register_firstname').clear().type("Mathieu2")
+    cy.get('#register_name').clear().type("Mithridate2")
+    cy.get('#register_email').clear().type("mathieu.mith@laposte.net")
+    cy.get('#register_password_first').clear().type("1234")
+    cy.get('#register_password_second').clear().type("1234")
+    cy.get('#register_Ajouter').click()
+    cy.get('strong').should("contain", "Le compte a été mis à jour en BDD")
+  })
+  it('Modification du compte n\'existe pas', () => {
+    cy.visit('https://localhost:8000/register/update/1')
+    cy.get('strong').should("contain", "le compte n'existe pas")
+  })
+})
+Mathieu MITH — 06/11/2023 16:28
+Exemple avec un json :
+1 - Créer un fichier .json dans le dossier cypress/fixtures 
+//user.json
+{
+    "user":[
+        {"name":"test1", "firstname":"test1", "email":"mail1@mail.fr", "password":"1234"},
+        {"name":"test2", "firstname":"test2", "email":"mail2@mail.fr", "password":"1234"},
+        {"name":"test3", "firstname":"test3", "email":"mail3@mail.fr", "password":"1234"},
+        {"name":"test4", "firstname":"test4", "email":"mail4@mail.fr", "password":"1234"},
+        {"name":"test5", "firstname":"test5", "email":"mail5@mail.fr", "password":"1234"},
+        {"name":"test6", "firstname":"test6", "email":"mail6@mail.fr", "password":"1234"},
+        {"name":"test7", "firstname":"test7", "email":"mail7@mail.fr", "password":"1234"},
+        {"name":"test8", "firstname":"test8", "email":"mail8@mail.fr", "password":"1234"},
+        {"name":"test9", "firstname":"test9", "email":"mail9@mail.fr", "password":"1234"},
+        {"name":"test10", "firstname":"test10", "email":"mail10@mail.fr", "password":"1234"}
+    ]
+}
+
+2 - Utiliser la fonction before dans le test :
+//user.cy.js
+describe('Json', ()=>{
+    before(()=>{
+        cy.fixture("user.json").then(function(data){
+            this.data = data.user
+        })
+    })
+    it("Boucle json", function(){
+        this.data.forEach((user)=>{
+            cy.log(user.name)
+            cy.log(user.firstname)
+            cy.log(user.email)
+            cy.log(user.password)
+        })
+    })
+})
+ 
+Exercice Json et test :
+Depuis l'exemple ci-dessus et la correction du test précédent :
+-Répéter la modification du compte avec les valeurs contenu dans le fichier cypress/fixtures/user.json.
+Mathieu MITH — 06/11/2023 17:04
+Support de cours à jour avec la partie test automatique et vidéo :
+Type de fichier joint : acrobat
+cours_testingv1_partie1.pdf
+1.70 MB
+Lien documentation paramétrage des exports vidéos :
+https://docs.cypress.io/guides/guides/screenshots-and-videos 
+Mathieu MITH — 07/11/2023 09:29
+Correction exercice Json et test :
+describe('Json', ()=>{
+    before(()=>{
+        cy.fixture("user.json").then(function(data){
+            this.data = data.users
+        })
+    })
+    it("Boucle json", function(){
+        this.data.forEach((user)=>{
+            cy.visit('https://localhost:8000/register/update/2')
+            cy.get('#register_firstname').clear().type(user.firstname)
+            cy.get('#register_name').clear().type(user.name)
+            cy.get('#register_email').clear().type(user.email)
+            cy.get('#register_password_first').clear().type(user.password)
+            cy.get('#register_password_second').clear().type(user.password)
+            cy.get('#register_Ajouter').click()
+            cy.get('strong').should("contain", "Le compte a été mis à jour en BDD")
+        })
+    })
+    it('Modification du compte n\'existe pas', () => {
+        cy.visit('https://localhost:8000/register/update/1')
+        cy.get('strong').should("contain", "le compte n'existe pas")
+    })
+})
+Mathieu MITH — 07/11/2023 10:13
+Ajouter une nouvelle entité Symfony avec les attributs suivants :
+title (nom du test) string
+date (date d'exécution du test) datetime,
+statut (statut du test réussi ou échoué) boolean,
+Ajouter un controller TestsController avec une méthode validationTests qu iva éffectuer l'action suivante :
+-Récupérer un json (title, date, statut),
+-Ajouter un nouvel enregistrement en BDD depuis le json
+-Renvoyé un json avec le code 200 et le un message "error: test enregistré"
+Mathieu MITH — 07/11/2023 12:18
+Correction exercice :
+describe('Test utilisateur', () => {
+  it('Modification du compte existe', () => {
+    cy.visit('https://localhost:8000/register/update/1')
+    cy.get('#register_firstname').clear().type("Mathieu2")
+    cy.get('#register_name').clear().type("Mithridate2")
+    cy.get('#register_email').clear().type("mathieu.mith@laposte.net")
+    cy.get('#register_password_first').clear().type("1234")
+    cy.get('#register_password_second').clear().type("1234")
+    cy.get('#register_Ajouter').click()
+    cy.get('strong').invoke("text").then((text)=>{
+      let dateTest = new Date();
+      dateTest = dateTest.getFullYear()+"-"+(dateTest.getMonth()+1)+"-"+dateTest.getDate();
+      let statut = true;
+      const url = "https://localhost:8000/tests/validation";
+      if(text=="Le compte a été mis à jour en BDD"){
+        statut = true;
+      }
+      else{
+        statut = false;
+      }
+      const json = JSON.stringify({"title":"Modification du compte existe","date":dateTest,
+        "statut":statut});
+      cy.request({
+        method: "POST",
+        url: url,
+        body:json
+      }).then((resp) => {
+        if(expect(resp.status).to.eq(200)){
+          cy.log("enregistrement ok")
+        }else{
+          cy.log('Le fichier json est incorrect')
+        }
+      })
+    })
+  })
+  it('Modification du compte n\'existe pas', () => {
+    cy.visit('https://localhost:8000/register/update/1')
+    cy.get('strong').should("contain", "le compte n'existe pas")
+  })
+})
+ 
+Mathieu MITH — 07/11/2023 13:49
+Partie Github et Cypress :
+https://github.com/cypress-io/github-action
+Créer un repository sur github,
+Créer un répertoire dans votre machine,
+Lier le dossier local au repository
+Mathieu MITH — 07/11/2023 13:56
+Initialiser le repertoire avec node :
+npm init -y
+
+installer cypress :
+npm install -D cypress
+Créer un fichier .gitignore :
+/node_modules/
+Mathieu MITH — 07/11/2023 14:12
+name: End-to-end tests
+on: push
+jobs:
+  cypress-run:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      # Install npm dependencies, cache them correctly
+      # and run all Cypress tests
+      - name: Cypress run
+        uses: cypress-io/github-action@v5
+Mathieu MITH — 07/11/2023 14:21
+Pull de votre repository,
+Ajouter un dossier dans votre projet en local :
+cypress/e2e
+Dans ce dossier vous allez ajouter un test comme ci-dessous :
+//test.cy.js
+describe('Exemple actions', ()=>{
+    it('ouvrir un site', ()=>{
+        cy.visit('https://google.com')
+    })
+})
+Mathieu MITH — 07/11/2023 14:32
+modifier le fichier package.json :
+"scripts": {
+    "test": "cypress open",
+    "auto_test": "cypress run --browser chrome"
+}
+ 
+Lancer cypress en local :
+npm run test
+Mathieu MITH — 07/11/2023 15:12
+support de cours complet :
+Type de fichier joint : acrobat
+cours_testingv1_complet.pdf
+1.78 MB
+name: Exemple
+on: push
+jobs:
+  cypress-run:
+    runs-on: ubuntu-22.04
+    name: Artifacts
+    steps:
+      - uses: actions/checkout@v3
+      - uses: cypress-io/github-action@v5
+      # after the test run completes
+      # store videos and any screenshots
+      # NOTE: screenshots will be generated only if E2E test failed
+      # thus we store screenshots only on failures
+      # Alternative: create and commit an empty cypress/screenshots folder
+      # to always have something to upload
+      - uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+      # Test run video was always captured, so this action uses "always()" condition
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: cypress-videos
+          path: cypress/videos
+Mathieu MITH — 07/11/2023 16:17
+url à utiliser à la place de celle en https://localhost:8000/ :
+https://securite.adrardev.fr/
+Repositoy Github de correction :
+https://github.com/mithridatem/cda_secu.git
+Mathieu MITH — 07/11/2023 16:29
+Exercice Test cypress et Github Action :
+Créer un test qui va ajouter un compte utilisateur :
+-aller sur la page cy.visit ("https://securite.adrardev.fr/register"),
+-Récupérer les 5 inputs,
+-Ajouter des valeurs dans les 5 inputs avec type,
+-Récupérer le bouton et appeler la fonction click,
+-Vérifier le contenu du message avec cy.get('strong').should("contain", "Le compte : mail@mail.fr a été ajouté en BDD")
+
+Faire un second test qui reprend les mêmes étapes sauf pour le message :
+"Le compte : mail@mail.fr existe déja" 
+Mathieu MITH — 07/11/2023 16:38
+Tester l'exécution du test sur votre repository github :
+-Push les modifications,
+-Vérifier le résultat dans action (Github)
+Mathieu MITH — 07/11/2023 17:01
+Correction :
+describe('Action Github',()=>{
+    it('Ajouter un compte', ()=>{
+        cy.visit("https://securite.adrardev.fr/register");
+        cy.get('#register_firstname').type("Mathieu")
+        cy.get('#register_name').type("Mithridate")
+        cy.get('#register_email').type("mail@mail.fr")
+        cy.get('#register_password_first').type("1234")
+        cy.get('#register_password_second').type("1234")
+        cy.get('#register_Ajouter').click()
+        cy.get('strong').should("contain", "Le compte : mail@mail.fr a été ajouté en BDD")
+    })
+    it('Ajouter un compte doublon',()=>{
+        cy.visit("https://securite.adrardev.fr/register");
+        cy.get('#register_firstname').type("Mathieu")
+        cy.get('#register_name').type("Mithridate")
+        cy.get('#register_email').type("mail@mail.fr")
+        cy.get('#register_password_first').type("1234")
+        cy.get('#register_password_second').type("1234")
+        cy.get('#register_Ajouter').click()
+        cy.get('strong').should("contain", "Le compte : mail@mail.fr existe déja")
+    })
+})
+ 

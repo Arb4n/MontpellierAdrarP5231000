@@ -1,0 +1,770 @@
+Cours Symfony sécurité
+[09:16]
+Extension VSCode :
+IntelliPHP - AI Autocomplete for PHP
+PHP Intelephense
+Error lens
+Twig Pack
+
+Créer un projet Symfony avec la commande ci-dessous :
+symfony new nom_projet --webapp
+ (modifié)
+
+7
+[09:18]
+Tester la version de PHP (version 8 +):
+php -v
+ (modifié)
+
+7
+[09:19]
+Tester la version de composer (Version 2.5 +):
+composer -V
+ (modifié)
+
+7
+
+Mathieu MITH — 30/10/2023 09:26
+https://getcomposer.org/Composer-Setup.exe
+
+Mathieu MITH — 30/10/2023 09:36
+symfony server:start -d
+symfony server:list
+ (modifié)
+
+Mathieu MITH — 30/10/2023 09:44
+Editer le fichier .env
+Commenter la connexion avec postgreSQL (#)
+décommenter et paragmétrer la ligne comme ci-dessous :
+DATABASE_URL="mysql://root:@127.0.0.1:3306/cda34secu?serverVersion=10.11.2-MariaDB&charset=utf8mb4"
+[09:46]
+
+composer.json
+2.94 KB
+[09:46]
+composer install
+[09:50]
+Supprimer le dossier .git
+refaire un 
+git init
+
+Mathieu MITH — 30/10/2023 09:55
+Créer un repository github :
+git remote add origin url.git
+git pull origin master
+[09:56]
+créer un projet (alternative) :
+composer create-project symfony/website-skeleton nom_projet
+[10:00]
+Ajouter tous les fichiers /
+git add *
+
+Commit la base du projet :
+git commit -m "base"
+
+envoyer la base sur github
+git push origin master
+
+Mathieu MITH — 30/10/2023 10:02
+repository OK
+
+6
+
+Mathieu MITH — 30/10/2023 10:13
+Création de l'entité User :
+symfony console make:user
+
+Mathieu MITH — 30/10/2023 10:26
+relancer la commande /
+symfony console make:entity
+Saisir le nom (User)
+
+Ajouter :
+-name  string 50 not null
+-fisrtname  50 not null
+-activated  boolean not null (modifié)
+[10:29]
+Modification de l'entité User ok
+
+6
+
+Mathieu MITH — 30/10/2023 10:34
+Créer la base :
+symfony console doctrine:database:create
+
+Créer le fichier de migration :
+symfony console make:migration
+
+Migrer la structure :
+symfony console doctrine:migrations:migrate
+
+Mathieu MITH — 30/10/2023 10:54
+services.msc /
+chercher MYSQL80
+désactiver,
+arréter
+[10:59]
+Si vous n'avez pas installé le certificat :
+symfony server:ca:install
+
+Mathieu MITH — 30/10/2023 11:17
+Saisir la configuration suivante :
+login :
+u444410201_symfonycda1 ou u444410201_symfonycda2
+password :
+Adrar31100
+nom BDD :
+u444410201_symfonycda1 ou u444410201_symfonycda2
+serveur :
+ 109.106.246.101
+Exemple :
+DATABASE_URL="mysql://u444410201_symfonycda1:Adrar31100@109.106.246.101:3306/u444410201_symfonycda1?serverVersion=10.11.2-MariaDB&charset=utf8mb4"
+ou
+DATABASE_URL="mysql://u444410201_symfonycda2:Adrar31100@109.106.246.101:3306/u444410201_symfonycda2?serverVersion=10.11.2-MariaDB&charset=utf8mb4"
+DATABASE_URL="mysql://u444410201_symfonycda2:Adrar31100@srv511.hstgr.io:3306/u444410201_symfonycda2?serverVersion=10.11.2-MariaDB&charset=utf8mb4"
+DATABASE_URL="mysql://u444410201_symfonycda1:Adrar31100@srv511.hstgr.io:3306/u444410201_symfonycda1?serverVersion=10.11.2-MariaDB&charset=utf8mb4"
+ (modifié)
+
+Mathieu MITH — 30/10/2023 11:25
+Saisir dans le terminal :
+symfony console make:auth
+
+Mathieu MITH — 30/10/2023 11:45
+Créer un controller Register
+symfony console make:controller
+[11:47]
+Créer un formulaire  Register :
+symfony console make:form
+
+5
+
+Mathieu MITH — 30/10/2023 11:57
+Modifier la classe src/form/RegisterType.php :
+ajouter la dépendance :
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+
+Dans la fonction :
+ $builder
+            ->add('name', TextType::class,
+            [
+                'attr'=>['class'=>'register'],
+                'label'=> 'Saisir votre nom : ',
+                'required'=>true
+            ])
+            ->add('firstname')
+            ->add('email')
+            ->add('password')
+        ;
+ (modifié)
+[12:00]
+Modifier la fonction buildForm :
+-Même chose pour firstname,
+-pour email : EmailType,
+-Password : RepeatType /
+Doc : https://symfony.com/doc/current/reference/forms/types/repeated.html
+-submit : submitType. (modifié)
+RepeatedType Field (Symfony Docs)
+
+
+4
+
+Mathieu MITH — 30/10/2023 12:28
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+
+public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
+        $builder
+            ->add('name', TextType::class,
+            [
+                'attr'=>['class'=>'register'],
+                'label'=> 'Saisir votre nom : ',
+                'required'=>true
+            ])
+            ->add('firstname', TextType::class,
+            [
+                'attr'=>['class'=>'register'],
+                'label'=> 'Saisir votre prénom : ',
+                'required'=>true
+            ])
+            ->add('email', EmailType::class,
+            [
+                'attr'=>['class'=>'register'],
+                'label'=> 'Saisir votre Email : ',
+                'required'=>true
+            ])
+            ->add('password', RepeatedType::class, [
+                'type' => PasswordType::class,
+                'invalid_message' => 'The password fields must match.',
+                'options' => ['attr' => ['class' => 'password-field']],
+                'required' => true,
+                'first_options'  => ['label' => 'Password : '],
+                'second_options' => ['label' => 'Repeat Password : '],
+            ])
+            ->add('Ajouter', SubmitType::class)
+        ;
+    }
+[12:34]
+Base index.html.twig :
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+ {{ form_start(form)}}
+    {{ form_row(form.firstname) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.email) }}
+    {{ form_row(form.password.first) }}
+    {{ form_row(form.password.second) }}
+ {{ form_end(form) }}
+{% endblock %}
+ (modifié)
+
+Mathieu MITH — 30/10/2023 13:40
+Lien bootswatch :
+https://bootswatch.com/
+Télécharger bootstrap.min.css
+[13:41]
+Récupérer le fichier bootstrap.min.js
+https://getbootstrap.com/docs/5.3/getting-started/download/
+[13:43]
+Créer dans le dossier public :
+-Créer un dossier asset
+Dans public/asset :
+-Créer un dossier style,
+-Créer un dossier script
+Déplacer le fichier bootrap.min.css -> public/asset/style
+Déplacer le fichier bootrap.min.js -> public/asset/script
+[13:45]
+Lier les scripts JS et CSS comme ci-dessous :
+dans le fichier templates/base.html.twig
+éditer le block stylesheets:
+     <link rel="stylesheet" href="{{ asset('asset/style/bootstrap.min.css') }}">
+
+éditer le block script  :
+    <script src="{{ asset('asset/script/bootstrap.min.js') }}" async></script>
+
+5
+
+Mathieu MITH — 30/10/2023 14:07
+Remplacer la méthode index  ->renommer en addUser,
+Elle va devoir effectuer le traitement suivant :
+-Créer une variable $msg = "";
+-Créer une variable $user qui va contenir un objet User (new User),
+-Créer une variable $form qui va contenir une méthode ($this->createForm(RegisterType::class, $user),
+-Appeler la fonction handleRequest sur l'objet $form (passer en paramètre $request),
+
+ 1 (if) Tester si le formulaire est submit :
+$form->isSubmitted() AND $form->isValid() :
+            2 (if)Tester si l'utilisateur existe déjà (
+             
+        repository UserRepository -> findOneBy( ['email'=>$user->getEmail()])
+      
+
+             Modifier la variable $msg = "L'utilisateur existe déjà";
+          2 (else) Tester sinon 
+            -Récupérer et setter le password :
+            
+     $pass = $request->request->all('register')['password']['first']
+     
+ (modifié)
+[14:10]
+hasher le mot de passe :
+$hash = hash->hashPassword($user, $pass)
+
+Setter le password ($user),
+Setter le role (["ROLE_USER"]),
+Setter l'activation (false),
+Persist et flush
+$em->persist($user),
+$em->flush()
+$msg = "Le compte a été ajouté en BDD" (modifié)
+[14:14]
+En dehors du else sortie de la fonction :
+return $this->render('register/index.html.twig', [
+            'form' => $form->createView(),
+            'msg' => $msg,
+        ]);
+
+Mathieu MITH — 30/10/2023 14:21
+Dans la classe RegisterController ajouter les dépendances suivantes et les paramètres à la fonction  addUser :
+use Doctrine\ORM\EntityManagerInterface;
+use App\Entity\User;
+use App\Repository\UserRepository;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\HttpFoundation\Request;
+use App\Form\RegisterType;
+
+public function addUser(EntityManagerInterface $em, UserRepository $repo, UserPasswordHasherInterface $hash, Request $request): Response{}
+ (modifié)
+
+5
+
+Mathieu MITH — 30/10/2023 14:41
+Ajouter dans index.html.twig
+{% if msg != "" %}
+  <div class="alert alert-dismissible alert-danger">
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    <strong>{{ msg }}</strong>
+  </div>
+{% endif %}
+ (modifié)
+
+Mathieu MITH — 30/10/2023 14:49
+Bonus :
+Ajouter les attributs suivants dans la classe RegisterController :
+private UserRepository $repo,
+Ajouter un constructeur avec en paramètre (UserRepository $repo) :
+$this->repo = $repo,
+NB : enlever les 2 paramètres de la fonction addUser et appeler les classes avec $this->repo et $this->request (modifié)
+
+1
+
+Mathieu MITH — 30/10/2023 15:39
+Lien correction :
+https://github.com/mithridatem/cda_secu
+
+Mathieu MITH — 30/10/2023 16:20
+Ajouter un répertoire src/Service,
+Ajouter dans ce répertoire un fichier UtilsService.php,
+<?php
+namespace App\Service;
+class UtilsService{
+    /**
+     * @param string $string
+     * @return string
+    */
+    public static function cleanInput(string $string){
+        return htmlspecialchars(strip_tags(trim($string)));
+    }
+}
+[16:25]
+Ajouter dans le RegisterController la dépendance suivante :
+use App\Service\UtilsService;
+//dans la récupération du mot de passe ajouter la fonction
+$pass = UtilsService::cleanInput($request->request->all('register')['password']['first']);
+Nettoyer les inputs suivants :
+-name,
+-firstname,
+-email,
+//en 2 fois
+$email = UtilsService::cleanInput($request->request->all('register')['email']);
+$user->setEmail($email);
+//en 1 fois
+$user->setEmail(UtilsService::cleanInput($request->request->all('register')['email']));
+
+4
+
+Mathieu MITH — 30/10/2023 16:36
+1 Créer une boite email sur :
+https://www.laposte.net/inscription?origin=lapostefr (modifié)
+
+3
+[16:39]
+2 Ajouter la dépendance avec composer :
+composer require phpmailer/phpmailer
+ (modifié)
+
+3
+[16:42]
+Paramètrage SMTP la poste :
+serveur: smtp.laposte.net
+port:465
+chiffrement:SSL
+ (modifié)
+
+Mathieu MITH — 30/10/2023 16:48
+3 Ajouter dans le fichier .env la configuration du serveur de messagerie :
+LOGIN_MAIL=login@laposte.net
+PASSWORD_MAIL=hhhhhhh
+SERVEUR_MAIL=smtp.laposte.net
+PORT_MAIL=465
+ (modifié)
+[16:49]
+4 Ajouter une nouvelle classe dans le dossier scr/Service
+MessagerieService.php (modifié)
+
+Mathieu MITH — 30/10/2023 16:56
+5 Ajouter dans le fichier config/services.yaml :
+      App\Service\MessagerieService:
+        arguments: ['%env(LOGIN_MAIL)%', '%env(PASSWORD_MAIL)%', '%env(SERVEUR_MAIL)%', '%env(PORT_MAIL)%']
+ (modifié)
+[16:57]
+Ex avec un token :
+parameters:
+    token: '%env(TOKEN)%'
+
+récupérable avec :
+$this->getParameter(token); (modifié)
+31 octobre 2023
+
+Mathieu MITH — 31/10/2023 09:21
+Créer une nouvelle classe dans le dossier src/Service/MessagerieService.php (modifié)
+
+6
+
+Mathieu MITH — 31/10/2023 09:36
+Base du MessagerieService :
+<?php
+namespace App\Service;
+
+class MessagerieService{
+    private ?string $login;
+    private ?string $password;
+    private ?string $serveur;
+    private ?int $port;
+    public function __construct(?string $login, ?string $password, ?string $serveur, ?int $port){
+        $this->login = $login;
+        $this->password = $password;
+        $this->serveur = $serveur;
+        $this->port = $port;
+    }
+    public function test(){
+        return $this->port;
+    }
+}
+ (modifié)
+
+Mathieu MITH — 31/10/2023 09:55
+Méthode sendMail :
+public function sendMail(?string $object, ?string $content, ?string $destinataire){
+        //Load Composer's autoloader
+        require '../vendor/autoload.php';
+
+        //Create an instance; passing `true` enables exceptions
+        $mail = new PHPMailer(true);
+
+        try {
+            //Server settings
+            $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+            $mail->isSMTP();
+            $mail->Host       = $this->serveur;
+            $mail->SMTPAuth   = true;
+            $mail->Username   = $this->login;
+            $mail->Password   = $this->password;
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+            $mail->Port       = $this->port;
+
+            //Recipients
+            $mail->setFrom($this->login, 'Mailer');
+            $mail->addAddress($destinataire);
+            //Content
+            $mail->isHTML(true);
+            $mail->Subject = $object;
+            $mail->Body    = $content;
+            $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+            $mail->send();
+            return 'Message has been sent';
+        } catch (Exception $e) {
+            return "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
+    }
+ (modifié)
+
+Mathieu MITH — 31/10/2023 10:03
+Modifier la méthode addUser du RegisterController.php :
+-Créer une variable qui va contenir l'objet du mail,
+-Créer une variable qui va contenir le corp du mail :
+Exemple de corp :
+"Pour activer le compte cliquer sur le lien ci-dessous :
+<a href='https://localhost:8000/register/activate/1'>Activer</a>";
+
+-Appeler la fonction sendMail du MessagrieService.
+-Vérifier si le mail est bien reçu. (modifié)
+
+3
+
+Mathieu MITH — 31/10/2023 11:07
+Ajouter une nouvelle méthode dans RegisterController.php qui va se nommer activateUser et qui va effectuer le traitement suivant :
+-Récupérer la valeur de l'id dans l'url avec {id} dans la route : /register/activate/{id} passer une variable $id
+-Nettoyer la variable $id avec la méthode cleanInput 
+-Tester si le compte existe find de UserRepository,
+-Si le compte existe passer l'attribut activated à true,
+-Faire une redirection vers la route /login (app_login)
+-Sinon faire une redirection vers la route /register (app_register) (modifié)
+
+3
+
+Mathieu MITH — 31/10/2023 12:03
+Modifier la classe dans Security/AppAuthAuthentificator.php :
+-Ajouter les dépendance :
+Entity/User, Repository/UserRepository,
+-Ajouter un attribut private qui va stocker le repo User,
+-Ajouter un paramètre de type UserRepository dans le constructeur,
+-Attribuer le paramètre à l'attribut :
+$this->repo = $repo,
+
+Mathieu MITH — 31/10/2023 12:11
+Modifier la méthode onAuthenticationSuccess :
+1 récupérer le email de l'utilisateur ($request),
+2 avec le email récupérer le compte (UserRepositoy ->findOneBy),
+3 Si le compte est activé (activated à true) 
+rediriger vers la page accueil (ou une autre page),
+4 sinon on va renvoyer vers la page /register/activate/id
+exemple de redirection avec un paramètre id :
+return new RedirectResponse($this->urlGenerator->generate('app_register_activate', ['id'=> 1]));
+ (modifié)
+
+4
+
+Mathieu MITH — 31/10/2023 12:25
+fichier .env :
+
+env
+2.16 KB
+
+Mathieu MITH — 31/10/2023 12:35
+Cours Securité Symfony : (modifié)
+
+TP_securite_symfony.pdf
+1.30 MB
+
+Mathieu MITH — 31/10/2023 13:53
+https://github.com/knpuniversity/oauth2-client-bundle
+
+Mathieu MITH — 31/10/2023 14:15
+Ajouter une nouvelle une nouvelle méthode qui va envoyer un mail :
+sendMailActivate :
+-ajouter un paramètre id, récupérer avec l'url /register/sendmail/{id},
+avec  le traitement suivant :
+-Nettoyer le contenu de la variable id,
+-récupérer le compte (find du UserRepository),
+ if(Tester si le compte existe) :
+-envoyer un email comme dans la fonction addUser :
+-variable pour l'objet du mail,
+-variable le corp du mail,
+appeler la fonction sendMail du MessagerieService.
+else(Si le compte n'existe pas on fais une redirection vers la page d'inscription) (modifié)
+
+1
+[14:16]
+Modifier la fonction appelé dans onAuthenticationSuccess : redirection vers /register/sendmail/ (modifié)
+
+1
+
+Mathieu MITH — 31/10/2023 15:22
+Partie 2 API et JSON WEB TOKEN :
+Depuis le diagramme de classe ci-dessous ajouter l'entité Article :
+[15:22]
+
+[15:24]
+Extension gettersetter StarUmL à déposer dans : utilisateur/nom/AppData/Roaming/StarUml/extensions/user
+
+niklauslee.staruml-gettersetter.zip
+97.48 KB
+[15:26]
+Ajouter l'entité Article.
+
+3
+
+Mathieu MITH — 31/10/2023 16:51
+récupérer cette librairie :
+composer require firebase/php-jwt
+[16:55]
+Installer extension VsCode :
+OpenPGP Encryption
+ou avec le site :
+https://www.base64encode.org/ (modifié)
+Base64 Encode
+Base64 Encode and Decode - Online
+Encode to Base64 format or decode from it with various advanced options. Our site has an easy to use online tool to convert your data.
+
+2 novembre 2023
+
+Mathieu MITH — 02/11/2023 09:11
+https://symfony.com/doc/current/components/serializer.html
+
+Mathieu MITH — 02/11/2023 09:25
+1 Créer 'l'entité Article comme dans le diagramme de classe ci-dessus,
+2 créer un controller ApiArticleController qui va contenir 2 méthodes et un constructeur :
+-1 attribut articlerepository en private de type ArticleRepository,
+-2 constructeur qui prend en paramètre ArticleRepository,
+-3 un méthode qui s'appelle getAllArticle et qui retourne un json de tous les articles, (route /api/article/all)
+-4 une méthode qui s'appelle getArticleById et qui retourne un json depuis l'id de l'article. ($id en paramètre, et route /api/article/id/{id}) (modifié)
+
+6
+
+Mathieu MITH — 02/11/2023 10:14
+Créer une nouvelle méthode addArticle (méthods: POST) :
+-Ajouter les dépendances :
+use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Serializer\SerializerInterface;
+
+-Ajouter les attributs suivants à la classe ApiArticleController :
+-un attribut entitymanager de type EntityManagerInterface,
+-un attribut serializer de type SerializerInterface
+-Ajouter les 2 attributs dans le constructeur de la classe,
+-Ajouter un paramètre Request à la méthode addArticle;
+la fonction va éffectuer le traitement suivant :
+-récupérer le json envoyé ( title, content, date),
+-transformer en tableau (sérializer),
+-récupérer les valeurs (title, content, date),
+-setter les valeurs récupérées dans un objet article,
+-flush
+-Retourner un json pour indiquer que l'article à été bien ajouté en BDD (modifié)
+
+3
+[10:16]
+NB : récupérer json avec getContent voir la classe Request. (modifié)
+
+Mathieu MITH — 02/11/2023 10:27
+Capture exemple de json d'envoi depuis postman : (modifié)
+
+
+Mathieu MITH — 02/11/2023 12:31
+{
+    "title":"titre depuis test 3",
+    "content": "Contenue de l'article 3 depuis le json",
+    "date": "2023-11-02",
+    "author":{
+        "email":"mathieu.mith1@laposte.net"
+    }
+}
+
+Mathieu MITH — 02/11/2023 13:49
+1 Créer votre clé de chiffrement (avec le site ou l'extension),
+-ajouter dans le fichier .env une entrée :
+TOKEN="coller la clé de chiffrement" (modifié)
+[13:53]
+2 Ajouter une entrée dans le fichier config/services.yaml :
+
+# soit dans parameters :
+parameters:
+    token: '%env(TOKEN)%'
+# ou 
+    App\Service\JwtService:
+        arguments: ['%env(TOKEN)%']
+ (modifié)
+
+5
+
+Mathieu MITH — 02/11/2023 14:03
+3 Créer un fichier dans src/Service/JwtService.php :
+<?php
+namespace App\Service;
+class JwtService{
+    private string $token;
+    public function __construct(string $token){
+        $this->token = $token;
+    }
+}
+[14:06]
+Support création de la clé Token (JWT) :
+
+cle_jwt.pdf
+1.09 MB
+
+Mathieu MITH — 02/11/2023 14:13
+4 Ajouter les dépendance ci-dessous à la classe JwtService :
+use App\Repository\UserRepository;
+use App\Service\UtilsService;
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+[14:16]
+5 Ajouter 2 attributs dans le constructeur de la classe :
+-La classe UserPasswordHasherInterface (pour vérifier le mot de passe de l’utilisateur),
+-La classe UserRepository (pour vérifier si le compte existe et le récupérer),
+Ajouter au constructeur les 2 paramètres
+
+6 Créer la méthode authentification qui va nous permettre de vérifier les informations de connexion de l’utilisateur. 
+Elle va prendre les paramètres suivant en entrée :
+-Le mail et le mot de passe de l’utilisateur.
+
+La fonction va effectuer les actions suivantes :
+-Nettoyer les informations (UtilsService et la fonction  cleanInput),
+-Récupérer le compte avec le mail (UserRepository et la fonction findOneBy),
+-Tester si le compte existe,
+-Tester si le mot de passe est valide (UserPasswordHasherInterface et la fonction isPasswordValid)
+Elle va retourner true si tout est bon sinon false (si le password ou le mail ne sont pas valides) (modifié)
+
+2
+
+Mathieu MITH — 02/11/2023 14:20
+Tester la fonction dans ApiArticleController.php en créant une nouvelle méthode 
+qui appelle la fonction authentification de JwtService.
+Pour vérifier  qu'elle fonctionne bien. (modifié)
+
+2
+
+Mathieu MITH — 02/11/2023 15:52
+Support de cours Symfony_securite : (modifié)
+
+cours_complet_symfony_securite.pdf
+4.29 MB
+
+Mathieu MITH — 02/11/2023 15:59
+https://www.sitepoint.com/php-authorization-jwt-json-web-tokens/
+[16:01]
+tester token JWT :
+https://jwt.io/
+
+Mathieu MITH — 02/11/2023 16:13
+Ajouter la méthode ci-dessous dans JwtService :
+public function genToken($email){
+        //construction du JWT
+        require_once('../vendor/autoload.php');
+        //Variables pour le token
+        $issuedAt   = new \DateTimeImmutable();
+        $expire     = $issuedAt->modify('+60 minutes')->getTimestamp();
+        $serverName = "your.domain.name";
+        $userName   = $this->userRepository->findOneBy(['email'=>$email])->getName();
+        $userFirstname   = $this->userRepository->findOneBy(['email'=>$email])->getFirstname();
+        $id   = $this->userRepository->findOneBy(['email'=>$email])->getId();
+        //Contenu du token
+        $data = [
+            'iat'  => $issuedAt->getTimestamp(),         // Timestamp génération du token
+            'iss'  => $serverName,                       // Serveur
+            'nbf'  => $issuedAt->getTimestamp(),         // Timestamp empécher date antérieure
+            'exp'  => $expire,                           // Timestamp expiration du token
+            'userName' => $userName,
+            'userFirstName' => $userFirstname,
+            'userId' => $id,                    
+        ];
+        //retourne le JWT token encode
+        $token = JWT::encode(
+            $data,
+            $this->token,
+            'HS512'
+        );
+        return $token;
+    }
+ (modifié)
+
+Mathieu MITH — 02/11/2023 16:58
+Hébergement symfony :
+# .htaccess
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{THE_REQUEST} /public/([^\s?]*) [NC]
+    RewriteRule ^ %1 [L,NE,R=302]
+    RewriteRule !\.(js|gif|JPG|JPEG|PNG|jpeg|jpg|png|webmanifest|webp|css|txt|svg|woff|woff2|ttf|map|ico)$ public/index.php [L]
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
+ (modifié)
+
+Mathieu MITH — 02/11/2023 17:06
+Fichier .htaccess à déposer à la racine,
+1 cloner votre repository github
+2 paramétrer le fichier .env :
+APP_DEV=prod
+paramétrer la connexion BDD,
+3 télécharger le fichier composer.phar
+copier à la racine du projet 
+https://getcomposer.org/download/
+4 saisir la commande :
+php composer.phar update
+# ou
+php composer.phar install
+
+5 migrer la base de données :
+soit avec la commande migration
+soit avec export et import de PHPmyAdmin (modifié)
+Composer
+A Dependency Manager for PHP
